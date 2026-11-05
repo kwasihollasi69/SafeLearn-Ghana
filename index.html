@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeLearn Ghana</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f8f4;color:#183326}
+header{background:#087b43;color:white;padding:28px 20px;border-radius:0 0 25px 25px}
+header h1{font-size:29px;margin:8px 0}
+header p{margin:5px 0}
+.logo{font-size:35px}
+main{padding:18px;max-width:600px;margin:auto}
+h2{font-size:21px}
+.card{background:white;padding:18px;margin:14px 0;border-radius:16px;box-shadow:0 3px 12px #00000010}
+.card h3{margin-top:0;color:#087b43}
+button{background:#087b43;color:white;border:0;border-radius:10px;padding:13px 18px;font-size:15px;cursor:pointer}
+button:active{opacity:.8}
+.tag{color:#087b43;font-weight:bold}
+.warning{background:#fff1df;border-left:5px solid #ed941e;padding:14px;border-radius:9px}
+footer{text-align:center;padding:25px;color:#65766a;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🛡️</div>
+<h1>SafeLearn Ghana</h1>
+<p>Learn to stay safe online. Protect yourself from scams.</p>
+</header>
+<main>
+<div class="card">
+<h2>Welcome to SafeLearn! 🇬🇭</h2>
+<p>Knowledge is your best protection. Learn how to recognize online scams and protect your money and personal information.</p>
+</div>
+<h2>🛡️ Learn about online safety</h2>
+<div class="card">
+<h3>📱 Mobile Money Scams</h3>
+<p>Never share your MoMo PIN or OTP with anyone. Always verify payment messages before sending money.</p>
+</div>
+<div class="card">
+<h3>💼 Fake Job Offers</h3>
+<p>Be careful when someone asks you to pay money to get a job. Verify the company and its official contact details.</p>
+</div>
+<div class="card">
+<h3>🔗 Fake Links</h3>
+<p>Do not click suspicious links. Check the website address before entering your personal information.</p>
+</div>
+<div class="card">
+<h3>🔐 Password Safety</h3>
+<p>Use strong, unique passwords. Never share your passwords with strangers.</p>
+</div>
+<div class="warning">
+<strong>⚠️ Remember:</strong>
+<p>Never send money or share secret codes because of an urgent message. Stop and verify first.</p>
+</div>
+<div class="card">
+<h2>🧠 Test your knowledge</h2>
+<p id="question">Someone calls asking for your MoMo PIN. What should you do?</p>
+<button onclick="answer(true)">Never share my PIN</button>
+<button onclick="answer(false)" style="background:#777;margin-top:8px">Give them my PIN</button>
+<p id="result"></p>
+</div>
+<div class="card">
+<h3>🇬🇭 Our mission</h3>
+<p>SafeLearn Ghana helps people become smarter and safer online through free education and awareness.</p>
+</div>
+</main>
+<footer>© 2026 SafeLearn Ghana | Stay alert. Stay safe.</footer>
+<script>
+function answer(correct){
+const result=document.getElementById('result');
+if(correct){
+result.textContent='✅ Correct! Never share your MoMo PIN.';
+result.style.color='green';
+}else{
+result.textContent='❌ Incorrect! Keep your PIN secret and never share it.';
+result.style.color='red';
+}
+}
+</script>
+</body>
+</html>
