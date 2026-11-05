@@ -7,68 +7,164 @@
 <title>SafeLearn Ghana</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f2f8f3;color:#183b2a}
-header{background:#08783d;color:white;padding:30px 20px;text-align:center}
-.logo{font-size:48px}
-h1{margin:8px 0}
-header p{margin:5px}
-main{padding:20px;max-width:650px;margin:auto}
-.card{background:white;padding:20px;margin:15px 0;border-radius:14px;box-shadow:0 3px 12px #0001}
+body{margin:0;font-family:Arial,sans-serif;background:#f2f8f3;color:#173b28}
+header{background:#08783d;color:white;text-align:center;padding:28px 15px}
+header h1{margin:0;font-size:28px}
+header p{margin:9px 0 0}
+main{max-width:650px;margin:auto;padding:16px}
+.welcome{background:#d9f3df;padding:20px;border-radius:14px;margin-bottom:18px}
 h2{color:#08783d}
-button{background:#08783d;color:white;border:0;padding:13px 18px;border-radius:8px;font-size:16px;cursor:pointer}
-button:hover{background:#055b2e}
-input,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
-footer{text-align:center;padding:20px;color:#587260}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+button{border:0;border-radius:12px;padding:17px 10px;background:#08783d;color:white;font-size:15px;font-weight:bold;cursor:pointer}
+button:active{opacity:.8}
+button.secondary{background:#e2f2e6;color:#07552d}
+.panel{display:none;background:white;padding:18px;border-radius:14px;margin-top:18px;box-shadow:0 2px 9px #0001}
+.panel.active{display:block}
+li{margin-bottom:12px;line-height:1.5}
+input,textarea,select{width:100%;padding:12px;margin:8px 0 14px;border:1px solid #bbb;border-radius:8px;font-size:16px}
+.submit{width:100%;margin-top:8px}
+.note{font-size:13px;color:#555;line-height:1.5}
+footer{text-align:center;padding:22px;color:#567}
 </style>
 </head>
 <body>
+
 <header>
-<div class="logo">🛡️</div>
-<h1>SafeLearn Ghana</h1>
-<p>Learn. Detect. Protect.</p>
-<p>Stay safe from online scams.</p>
+<h1>🇬🇭 SafeLearn Ghana</h1>
+<p>Your safety. Your money. Your future.</p>
 </header>
+
 <main>
-<div class="card">
-<h2>Welcome!</h2>
-<p>Learn how to identify scams and protect your money and personal information.</p>
+<div class="welcome">
+<h2>Welcome to SafeLearn Ghana!</h2>
+<p>Learn how to identify scams, protect your money and stay safe online.</p>
 </div>
-<div class="card">
-<h2>🚨 Common Scams</h2>
+
+<div class="menu">
+<button onclick="showPage('scams')">Common Scams</button>
+<button onclick="showPage('tips')">Safety Tips</button>
+<button onclick="showPage('report')">Report Scam</button>
+<button onclick="showPage('momo')">MoMo Protection</button>
+<button onclick="showPage('check')">Check a Message</button>
+<button onclick="showPage('quiz')">Security Quiz</button>
+</div>
+
+<section id="scams" class="panel">
+<h2>Common Scams in Ghana</h2>
 <ul>
-<li>Fake job offers asking for registration fees.</li>
-<li>Mobile Money fraud messages.</li>
-<li>Fake investment promises.</li>
-<li>Fake online shopping sellers.</li>
+<li><b>Mobile Money scams:</b> Fake payment messages and calls pretending to be MoMo agents.</li>
+<li><b>Fake job offers:</b> People asking for registration fees before giving you a job.</li>
+<li><b>Online shopping scams:</b> Sellers collecting money without delivering goods.</li>
+<li><b>Romance scams:</b> Strangers asking for money after building online relationships.</li>
+<li><b>Fake investment scams:</b> Promises of guaranteed high profits.</li>
 </ul>
-</div>
-<div class="card">
-<h2>🛡️ Safety Tips</h2>
+</section>
+
+<section id="tips" class="panel">
+<h2>Safety Tips</h2>
 <ul>
-<li>Never share your Mobile Money PIN.</li>
-<li>Never share your OTP code.</li>
-<li>Verify a job offer before paying.</li>
-<li>Do not click suspicious links.</li>
+<li>Never share your MoMo PIN or password.</li>
+<li>Never share your OTP verification code.</li>
+<li>Check website addresses before entering personal details.</li>
+<li>Do not send money to strangers promising jobs or prizes.</li>
+<li>Use strong and different passwords.</li>
+<li>Verify information before sending money.</li>
 </ul>
-</div>
-<div class="card">
-<h2>📢 Report a Scam</h2>
-<p>Write down the details of a suspicious message or offer.</p>
-<textarea id="report" rows="4" placeholder="Describe the suspected scam..."></textarea>
-<button onclick="sendReport()">Submit Report</button>
-<p id="result"></p>
-</div>
+</section>
+
+<section id="report" class="panel">
+<h2>Report a Scam</h2>
+<p>Describe a suspicious incident below.</p>
+<form onsubmit="submitReport(event)">
+<label>Your name (optional)</label>
+<input id="reportName" placeholder="Your name">
+<label>Type of scam</label>
+<select id="reportType" required>
+<option value="">Choose scam type</option>
+<option>Mobile Money scam</option>
+<option>Fake job offer</option>
+<option>Online shopping scam</option>
+<option>Investment scam</option>
+<option>Other</option>
+</select>
+<label>What happened?</label>
+<textarea id="reportDetails" rows="4" placeholder="Describe what happened..." required></textarea>
+<button class="submit" type="submit">Submit Report</button>
+</form>
+<p class="note">Demo only: this form does not send reports to the police or any authority. Keep evidence and contact the appropriate official service.</p>
+<div id="reportResult"></div>
+</section>
+
+<section id="momo" class="panel">
+<h2>MoMo Scam Protection</h2>
+<ul>
+<li>Never give anyone your MoMo PIN.</li>
+<li>Check your actual account balance before confirming a payment.</li>
+<li>Do not trust screenshots as proof of payment.</li>
+<li>Never follow instructions from suspicious callers.</li>
+<li>Contact your mobile money provider through its official channels if you suspect fraud.</li>
+</ul>
+</section>
+
+<section id="check" class="panel">
+<h2>Check a Suspicious Message</h2>
+<p>Paste a suspicious message to look for warning signs.</p>
+<textarea id="message" rows="4" placeholder="Paste your message here..."></textarea>
+<button class="submit" onclick="checkMessage()">Check Message</button>
+<div id="messageResult"></div>
+<p class="note">This tool checks common warning words. It cannot prove whether a message is genuine or fraudulent.</p>
+</section>
+
+<section id="quiz" class="panel">
+<h2>Security Quiz</h2>
+<p>Someone calls and asks for your MoMo PIN. What should you do?</p>
+<button class="secondary" onclick="answer(false)">Give them my PIN</button>
+<button class="secondary" onclick="answer(true)">Never share my PIN</button>
+<div id="quizResult"></div>
+</section>
+
+<footer>
+<p>© 2026 SafeLearn Ghana</p>
+<p>Learn. Protect. Stay Safe.</p>
+</footer>
 </main>
-<footer>© 2026 SafeLearn Ghana</footer>
+
 <script>
-function sendReport(){
-let report=document.getElementById('report').value.trim();
-if(!report){
-document.getElementById('result').textContent='Please enter a report first.';
+function showPage(id){
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+function submitReport(event){
+event.preventDefault();
+document.getElementById('reportResult').innerHTML=
+'<p style="color:green"><b>Your report has been recorded on this page.</b></p><p class="note">It has not been sent or saved to a server.</p>';
+event.target.reset();
+}
+
+function checkMessage(){
+let msg=document.getElementById('message').value.toLowerCase();
+let words=['urgent','password','pin','otp','send money','winner','prize','free money','click here','verify account'];
+let found=words.filter(w=>msg.includes(w));
+let result=document.getElementById('messageResult');
+if(!msg.trim()){
+result.innerHTML='<p>Please enter a message first.</p>';
 return;
 }
-document.getElementById('result').textContent='Your report has been recorded on this page. Please save the details safely.';
+if(found.length){
+result.innerHTML='<p style="color:#b45309"><b>Warning signs found:</b> '+found.join(', ')+'. Be careful and verify the sender.</p>';
+}else{
+result.innerHTML='<p>No common warning words found. This does not guarantee the message is safe.</p>';
+}
+}
+
+function answer(correct){
+document.getElementById('quizResult').innerHTML=correct?
+'<p style="color:green"><b>Correct! Never share your MoMo PIN.</b></p>':
+'<p style="color:red"><b>Incorrect. Never share your PIN with anyone.</b></p>';
 }
 </script>
+
 </body>
 </html>
