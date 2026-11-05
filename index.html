@@ -1,198 +1,74 @@
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SafeLearn Ghana</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f8f3;color:#183b28}
-header{background:#08783e;color:white;text-align:center;padding:28px 15px}
-header h1{margin:0;font-size:30px}
-header p{margin-bottom:0}
-select{padding:10px;border-radius:8px;border:0;margin-top:15px}
-main{max-width:850px;margin:auto;padding:18px}
-.card{background:white;padding:20px;margin:15px 0;border-radius:14px;box-shadow:0 3px 12px #00000012}
-h2{color:#08783e}
-button{background:#08783e;color:white;border:0;padding:12px 18px;border-radius:8px;margin:6px;cursor:pointer;font-size:15px}
+body{margin:0;font-family:Arial,sans-serif;background:#f2f8f3;color:#183b2a}
+header{background:#08783d;color:white;padding:30px 20px;text-align:center}
+.logo{font-size:48px}
+h1{margin:8px 0}
+header p{margin:5px}
+main{padding:20px;max-width:650px;margin:auto}
+.card{background:white;padding:20px;margin:15px 0;border-radius:14px;box-shadow:0 3px 12px #0001}
+h2{color:#08783d}
+button{background:#08783d;color:white;border:0;padding:13px 18px;border-radius:8px;font-size:16px;cursor:pointer}
 button:hover{background:#055b2e}
-.warning{background:#fff3cd;border-left:5px solid #e5a000;padding:15px;border-radius:8px}
-footer{text-align:center;background:#075c32;color:white;padding:20px;margin-top:25px}
-#result{font-weight:bold;font-size:18px}
+input,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+footer{text-align:center;padding:20px;color:#587260}
 </style>
 </head>
 <body>
-
 <header>
-<h1>🛡️ SafeLearn Ghana</h1>
-<p id="subtitle">Apprends à reconnaître les arnaques en ligne et protège ton argent.</p>
-<select id="language" onchange="changeLanguage()">
-<option value="fr">Français</option>
-<option value="en">English</option>
-</select>
+<div class="logo">🛡️</div>
+<h1>SafeLearn Ghana</h1>
+<p>Learn. Detect. Protect.</p>
+<p>Stay safe from online scams.</p>
 </header>
-
 <main>
-<section class="card">
-<h2 id="welcome">Bienvenue sur SafeLearn Ghana !</h2>
-<p id="intro">Notre mission est d'aider les personnes au Ghana à éviter les escroqueries sur Internet et à utiliser leur téléphone en toute sécurité.</p>
-</section>
-
-<section class="card">
-<h2 id="lessons">📚 Nos leçons de sécurité</h2>
-
-<h3 id="momo">1. Arnaques Mobile Money</h3>
-<p id="momoText">Ne donne jamais ton code PIN ou ton code secret à quelqu'un. Un vrai agent ne doit jamais te demander ton PIN.</p>
-
-<h3 id="jobs">2. Fausses offres d'emploi</h3>
-<p id="jobsText">Méfie-toi des personnes qui promettent un emploi très bien payé et demandent de l'argent pour l'inscription ou le recrutement.</p>
-
-<h3 id="links">3. Faux liens Internet</h3>
-<p id="linksText">Ne clique pas sur les liens suspects reçus par SMS ou WhatsApp. Vérifie toujours l'adresse du site avant de donner tes informations.</p>
-
-<h3 id="passwords">4. Protection des mots de passe</h3>
-<p id="passwordsText">Utilise un mot de passe difficile à deviner. Ne partage jamais tes mots de passe avec des inconnus.</p>
-
-<h3 id="social">5. Réseaux sociaux</h3>
-<p id="socialText">Ne partage pas tes informations personnelles, ton adresse ou tes documents avec des inconnus sur Internet.</p>
-</section>
-
-<section class="card">
-<h2 id="warningTitle">⚠️ Règle importante</h2>
-<div class="warning" id="warningText">Si quelqu'un te demande de l'argent, ton PIN ou tes informations personnelles en promettant un cadeau ou un emploi, arrête-toi et vérifie avant d'agir.</div>
-</section>
-
-<section class="card">
-<h2 id="quizTitle">🧠 Teste tes connaissances</h2>
-<p id="question">Quelqu'un t'appelle et te demande ton code PIN Mobile Money. Que dois-tu faire ?</p>
-<div id="answers">
-<button onclick="answer(false)" id="wrong">Donner le code</button>
-<button onclick="answer(true)" id="right">Refuser de partager le code</button>
+<div class="card">
+<h2>Welcome!</h2>
+<p>Learn how to identify scams and protect your money and personal information.</p>
 </div>
+<div class="card">
+<h2>🚨 Common Scams</h2>
+<ul>
+<li>Fake job offers asking for registration fees.</li>
+<li>Mobile Money fraud messages.</li>
+<li>Fake investment promises.</li>
+<li>Fake online shopping sellers.</li>
+</ul>
+</div>
+<div class="card">
+<h2>🛡️ Safety Tips</h2>
+<ul>
+<li>Never share your Mobile Money PIN.</li>
+<li>Never share your OTP code.</li>
+<li>Verify a job offer before paying.</li>
+<li>Do not click suspicious links.</li>
+</ul>
+</div>
+<div class="card">
+<h2>📢 Report a Scam</h2>
+<p>Write down the details of a suspicious message or offer.</p>
+<textarea id="report" rows="4" placeholder="Describe the suspected scam..."></textarea>
+<button onclick="sendReport()">Submit Report</button>
 <p id="result"></p>
-<button onclick="nextQuestion()" id="next">Question suivante</button>
-</section>
-
-<section class="card">
-<h2 id="mission">Notre mission 💚</h2>
-<p id="missionText">SafeLearn Ghana veut construire une communauté mieux informée et plus sûre sur Internet.</p>
-</section>
+</div>
 </main>
-
-<footer>
-<p>© 2026 SafeLearn Ghana</p>
-<p id="footerText">Apprendre aujourd'hui. Se protéger demain.</p>
-</footer>
-
+<footer>© 2026 SafeLearn Ghana</footer>
 <script>
-const questions = [
-{
-q:"Quelqu'un te demande ton code PIN Mobile Money. Que fais-tu ?",
-a:["Je donne le code","Je refuse de partager le code"],
-correct:1,
-enq:"Someone asks for your Mobile Money PIN. What do you do?",
-ena:["I give the PIN","I refuse to share the PIN"]
-},
-{
-q:"Une personne demande de l'argent pour te garantir un emploi. Que fais-tu ?",
-a:["Je paie immédiatement","Je vérifie l'offre avant de payer"],
-correct:1,
-enq:"Someone asks for money to guarantee you a job. What do you do?",
-ena:["I pay immediately","I check the offer first"]
-},
-{
-q:"Tu reçois un lien étrange sur WhatsApp. Que fais-tu ?",
-a:["Je clique dessus","Je vérifie avant de cliquer"],
-correct:1,
-enq:"You receive a strange WhatsApp link. What do you do?",
-ena:["I click it","I check it before clicking"]
-},
-{
-q:"Comment protéger ton mot de passe ?",
-a:["Le partager avec tout le monde","Le garder secret"],
-correct:1,
-enq:"How do you protect your password?",
-ena:["Share it with everyone","Keep it secret"]
-}
-];
-
-let current=0;
-let score=0;
-let answered=false;
-let lang="fr";
-
-function showQuestion(){
-answered=false;
-let q=questions[current];
-document.getElementById("question").textContent=lang==="fr"?q.q:q.enq;
-document.getElementById("wrong").textContent=lang==="fr"?q.a[0]:q.ena[0];
-document.getElementById("right").textContent=lang==="fr"?q.a[1]:q.ena[1];
-document.getElementById("result").textContent="";
-document.getElementById("next").textContent=lang==="fr"?"Question suivante":"Next question";
-}
-
-function answer(choice){
-if(answered)return;
-answered=true;
-let correct=questions[current].correct===choice;
-if(correct)score++;
-document.getElementById("result").textContent=correct?
-(lang==="fr"?"✅ Bonne réponse !":"✅ Correct!"):
-(lang==="fr"?"❌ Mauvaise réponse. Révise la leçon !":"❌ Wrong answer. Review the lesson!");
-}
-
-function nextQuestion(){
-if(!answered)return;
-current++;
-if(current>=questions.length){
-document.getElementById("question").textContent=lang==="fr"?"Test terminé !":"Quiz completed!";
-document.getElementById("answers").style.display="none";
-document.getElementById("result").textContent=
-(lang==="fr"?"Ton score : ":"Your score: ")+score+"/"+questions.length;
-document.getElementById("next").textContent=lang==="fr"?"Recommencer":"Restart";
-document.getElementById("next").onclick=restart;
+function sendReport(){
+let report=document.getElementById('report').value.trim();
+if(!report){
+document.getElementById('result').textContent='Please enter a report first.';
 return;
 }
-showQuestion();
+document.getElementById('result').textContent='Your report has been recorded on this page. Please save the details safely.';
 }
-
-function restart(){
-current=0;
-score=0;
-document.getElementById("answers").style.display="block";
-document.getElementById("next").onclick=nextQuestion;
-showQuestion();
-}
-
-function changeLanguage(){
-lang=document.getElementById("language").value;
-const en=lang==="en";
-const t={
-subtitle:["Apprends à reconnaître les arnaques en ligne et protège ton argent.","Learn to recognize online scams and protect your money."],
-welcome:["Bienvenue sur SafeLearn Ghana !","Welcome to SafeLearn Ghana!"],
-intro:["Notre mission est d'aider les personnes au Ghana à éviter les escroqueries sur Internet et à utiliser leur téléphone en toute sécurité.","Our mission is to help people in Ghana avoid online scams and use their phones safely."],
-lessons:["📚 Nos leçons de sécurité","📚 Safety lessons"],
-momo:["1. Arnaques Mobile Money","1. Mobile Money scams"],
-momoText:["Ne donne jamais ton code PIN ou ton code secret à quelqu'un. Un vrai agent ne doit jamais te demander ton PIN.","Never give your PIN or secret code to anyone. A real agent should never ask for your PIN."],
-jobs:["2. Fausses offres d'emploi","2. Fake job offers"],
-jobsText:["Méfie-toi des personnes qui promettent un emploi très bien payé et demandent de l'argent pour l'inscription ou le recrutement.","Be careful of people promising high-paying jobs and asking for registration or recruitment fees."],
-links:["3. Faux liens Internet","3. Fake Internet links"],
-linksText:["Ne clique pas sur les liens suspects reçus par SMS ou WhatsApp. Vérifie toujours l'adresse du site avant de donner tes informations.","Do not click suspicious links received by SMS or WhatsApp. Check the website address before sharing information."],
-passwords:["4. Protection des mots de passe","4. Password protection"],
-passwordsText:["Utilise un mot de passe difficile à deviner. Ne partage jamais tes mots de passe avec des inconnus.","Use a password that is difficult to guess. Never share your passwords with strangers."],
-social:["5. Réseaux sociaux","5. Social media"],
-socialText:["Ne partage pas tes informations personnelles, ton adresse ou tes documents avec des inconnus sur Internet.","Do not share personal information, your address or documents with strangers online."],
-warningTitle:["⚠️ Règle importante","⚠️ Important rule"],
-warningText:["Si quelqu'un te demande de l'argent, ton PIN ou tes informations personnelles en promettant un cadeau ou un emploi, arrête-toi et vérifie avant d'agir.","If someone asks for money, your PIN or personal information while promising a gift or a job, stop and check before acting."],
-quizTitle:["🧠 Teste tes connaissances","🧠 Test your knowledge"],
-mission:["Notre mission 💚","Our mission 💚"],
-missionText:["SafeLearn Ghana veut construire une communauté mieux informée et plus sûre sur Internet.","SafeLearn Ghana wants to build a better-informed and safer online community."],
-footerText:["Apprendre aujourd'hui. Se protéger demain.","Learn today. Stay safe tomorrow."]
-};
-for(let id in t)document.getElementById(id).textContent=t[id][en?1:0];
-restart();
-}
-showQuestion();
 </script>
 </body>
 </html>
