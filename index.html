@@ -5,190 +5,187 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08783d">
-<title>SafeLearn Ghana</title>
+<title>SafeLearn Ghana | Stay Safe Online</title>
 
 <style>
-* {
-  box-sizing: border-box;
+:root{
+  --green:#08783d;
+  --dark:#064b2a;
+  --gold:#f5c400;
+  --red:#d62828;
+  --bg:#f3f8f5;
+  --white:#ffffff;
+  --text:#183629;
+  --muted:#64756b;
 }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f2f8f3;
-  color: #173b28;
-  line-height: 1.6;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
-
-header {
-  background: linear-gradient(135deg, #08783d, #064d2a);
-  color: white;
-  text-align: center;
-  padding: 28px 15px;
+header{
+  background:linear-gradient(135deg,#064b2a,#0b914a);
+  color:white;
+  padding:22px 16px;
+  text-align:center;
 }
-
-header h1 {
-  margin: 0;
-  font-size: 30px;
+.logo{
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:1px;
 }
-
-header p {
-  margin: 8px 0 0;
+.logo span{color:var(--gold)}
+.tagline{font-size:14px;margin-top:7px}
+nav{
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:7px;
+  padding:12px;
+  box-shadow:0 3px 12px #00000012;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
-
-.language-box {
-  background: white;
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+nav button{
+  border:0;
+  background:#eaf3ed;
+  color:var(--dark);
+  padding:11px 13px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
 }
-
-select, input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 7px 0 14px;
-  border: 1px solid #cbd8ce;
-  border-radius: 8px;
-  font-size: 16px;
+nav button.active,
+nav button:hover{
+  background:var(--green);
+  color:white;
 }
-
-.language-box select {
-  max-width: 220px;
-  margin: 5px;
+.language{
+  background:var(--gold);
+  color:#222;
 }
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 7px;
-  padding: 12px;
-  background: #064d2a;
+main{
+  max-width:1100px;
+  margin:25px auto;
+  padding:0 15px;
 }
-
-nav button {
-  background: #ffffff;
-  color: #075d30;
-  border: none;
-  border-radius: 7px;
-  padding: 10px 12px;
-  font-weight: bold;
-  cursor: pointer;
+.panel{display:none}
+.panel.active{display:block}
+.hero{
+  background:linear-gradient(135deg,#08783d,#064b2a);
+  color:white;
+  padding:38px 24px;
+  border-radius:17px;
+  text-align:center;
+  box-shadow:0 8px 25px #064b2a20;
 }
-
-nav button.active {
-  background: #f5c542;
-  color: #173b28;
+.hero h1{font-size:32px;margin:0 0 12px}
+.hero p{line-height:1.7}
+.hero .gold{color:var(--gold)}
+.button{
+  display:inline-block;
+  background:var(--gold);
+  color:#222;
+  padding:13px 19px;
+  border:0;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:6px 4px;
 }
-
-main {
-  max-width: 850px;
-  margin: auto;
-  padding: 16px;
+.button.green{
+  background:var(--green);
+  color:white;
 }
-
-.panel {
-  display: none;
+.button.red{
+  background:var(--red);
+  color:white;
 }
-
-.panel.active {
-  display: block;
+.section-title{
+  text-align:center;
+  margin:32px 0 20px;
 }
-
-.hero {
-  background: white;
-  padding: 25px 18px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 3px 12px #00000010;
+.section-title h2{color:var(--dark)}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:17px;
 }
-
-.hero h2 {
-  color: #08783d;
+.card{
+  background:white;
+  padding:22px;
+  border-radius:13px;
+  box-shadow:0 4px 15px #00000009;
+  border:1px solid #e5eee8;
 }
-
-.card {
-  background: white;
-  padding: 18px;
-  margin: 14px 0;
-  border-radius: 12px;
-  border-left: 5px solid #08783d;
-  box-shadow: 0 2px 8px #0000000c;
+.card h3{color:var(--green);margin-top:8px}
+.card p{line-height:1.6;color:#52645a}
+.card-icon{font-size:34px}
+.card button{margin-top:10px}
+.notice{
+  background:#fff7d8;
+  border-left:5px solid var(--gold);
+  padding:15px;
+  border-radius:8px;
+  line-height:1.6;
+  margin:20px 0;
 }
-
-.card h3 {
-  margin-top: 0;
-  color: #08783d;
+.danger{
+  background:#fff0f0;
+  border-left:5px solid var(--red);
+  padding:15px;
+  border-radius:8px;
+  margin:15px 0;
+  line-height:1.6;
 }
-
-.primary, .submit, .danger {
-  display: inline-block;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 17px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 5px 3px;
+.success{
+  background:#e9f7ed;
+  border-left:5px solid var(--green);
+  padding:15px;
+  border-radius:8px;
+  margin:15px 0;
 }
-
-.primary, .submit {
-  background: #08783d;
-  color: white;
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccd9d0;
+  border-radius:8px;
+  margin:8px 0 16px;
+  font-size:15px;
+  background:white;
 }
-
-.danger {
-  background: #b42318;
-  color: white;
+textarea{min-height:120px;resize:vertical}
+label{font-weight:bold}
+.result{margin-top:18px;line-height:1.7}
+.stat{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
 }
-
-label {
-  font-weight: bold;
+.stat strong{
+  display:block;
+  color:var(--green);
+  font-size:25px;
 }
-
-.note {
-  color: #6b756e;
-  font-size: 13px;
+footer{
+  background:#063e25;
+  color:white;
+  padding:30px 15px;
+  text-align:center;
+  margin-top:40px;
+  line-height:1.8;
 }
-
-.report-item {
-  background: #f8fbf8;
-  border: 1px solid #d9e5dc;
-  border-radius: 9px;
-  padding: 13px;
-  margin: 12px 0;
-  overflow-wrap: anywhere;
-}
-
-.report-item h3 {
-  margin: 0;
-}
-
-footer {
-  background: #064d2a;
-  color: white;
-  text-align: center;
-  padding: 20px 12px;
-  margin-top: 30px;
-}
-
-footer p {
-  margin: 5px;
-}
-
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 25px;
-  }
-
-  nav button {
-    font-size: 13px;
-    padding: 9px;
-  }
-
-  main {
-    padding: 12px;
-  }
+footer span{color:var(--gold)}
+.small{font-size:13px;color:var(--muted)}
+@media(max-width:600px){
+  .hero h1{font-size:25px}
+  nav button{font-size:12px;padding:10px}
+  .logo{font-size:25px}
 }
 </style>
 </head>
@@ -196,554 +193,388 @@ footer p {
 <body>
 
 <header>
-  <h1>🛡️ SafeLearn Ghana</h1>
-  <p id="tagline">Learn. Identify. Prevent Scams.</p>
+  <div class="logo">SAFE<span>LEARN</span> GHANA</div>
+  <div class="tagline" data-en="Your Safety. Your Knowledge. Your Future."
+  data-fr="Votre sécurité. Votre connaissance. Votre avenir.">
+  Your Safety. Your Knowledge. Your Future.
+  </div>
 </header>
 
-<div class="language-box">
-  <label for="language" id="languageLabel">Choose language:</label>
-  <select id="language" onchange="changeLanguage()">
-    <option value="en">English</option>
-    <option value="fr">Français</option>
-    <option value="tw">Twi</option>
-  </select>
-</div>
-
 <nav>
-  <button class="active" onclick="showPage('home', this)" data-key="navHome">Home</button>
-  <button onclick="showPage('learn', this)" data-key="navLearn">Learn</button>
-  <button onclick="showPage('tips', this)" data-key="navTips">Safety Tips</button>
-  <button onclick="showPage('report', this)" data-key="navReport">Report Scam</button>
-  <button onclick="showPage('history', this)" data-key="navHistory">My Reports</button>
+  <button class="active" onclick="showPage('home',this)" data-en="Home" data-fr="Accueil">Home</button>
+  <button onclick="showPage('learn',this)" data-en="Learn" data-fr="Apprendre">Learn</button>
+  <button onclick="showPage('checker',this)" data-en="Scam Checker" data-fr="Détecteur">Scam Checker</button>
+  <button onclick="showPage('report',this)" data-en="Report Scam" data-fr="Signaler">Report Scam</button>
+  <button onclick="showPage('about',this)" data-en="About Us" data-fr="À propos">About Us</button>
+  <button class="language" onclick="toggleLanguage()" id="langBtn">FR 🇫🇷</button>
 </nav>
 
 <main>
 
+<!-- HOME -->
 <section id="home" class="panel active">
-  <div class="hero">
-    <h2 data-key="welcome">Welcome to SafeLearn Ghana</h2>
-    <p data-key="intro">A platform that helps people recognize, understand and avoid online scams.</p>
-    <button class="primary" onclick="showPage('learn')" data-key="startLearning">Start Learning</button>
-    <button class="primary" onclick="showPage('report')" data-key="reportNow">Report a Scam</button>
-  </div>
 
-  <div class="card">
-    <h3 data-key="missionTitle">Our Mission</h3>
-    <p data-key="missionText">To educate and protect people in Ghana against online fraud and financial scams.</p>
-  </div>
+<div class="hero">
+<h1 data-en="Welcome to SafeLearn Ghana"
+data-fr="Bienvenue sur SafeLearn Ghana">
+Welcome to SafeLearn Ghana
+</h1>
 
-  <div class="card">
-    <h3 data-key="warningTitle">Stay Alert!</h3>
-    <p data-key="warningText">Never share your Mobile Money PIN, password or verification code with strangers.</p>
-  </div>
+<p data-en="Learn how to identify online scams, protect your money and stay safe in the digital world."
+data-fr="Apprenez à identifier les arnaques en ligne, protéger votre argent et rester en sécurité dans le monde numérique.">
+Learn how to identify online scams, protect your money and stay safe in the digital world.
+</p>
+
+<h2 class="gold" data-en="STOP SCAMS. PROTECT YOUR FUTURE."
+data-fr="STOP AUX ARNAQUES. PROTÉGEZ VOTRE AVENIR.">
+STOP SCAMS. PROTECT YOUR FUTURE.
+</h2>
+
+<button class="button" onclick="showPage('learn')"
+data-en="Start Learning" data-fr="Commencer">
+Start Learning
+</button>
+
+<button class="button green" onclick="showPage('checker')"
+data-en="Check a Message" data-fr="Vérifier un message">
+Check a Message
+</button>
+</div>
+
+<div class="section-title">
+<h2 data-en="Explore SafeLearn Ghana"
+data-fr="Découvrez SafeLearn Ghana">Explore SafeLearn Ghana</h2>
+</div>
+
+<div class="grid">
+<div class="card">
+<div class="card-icon">📱</div>
+<h3>Mobile Money Safety</h3>
+<p data-en="Learn how to avoid Mobile Money fraud and protect your transactions."
+data-fr="Apprenez à éviter les fraudes Mobile Money et protéger vos transactions.">
+Learn how to avoid Mobile Money fraud and protect your transactions.
+</p>
+<button class="button green" onclick="showPage('learn')"
+data-en="Learn More" data-fr="En savoir plus">Learn More</button>
+</div>
+
+<div class="card">
+<div class="card-icon">💼</div>
+<h3 data-en="Fake Job Awareness" data-fr="Fausses offres d'emploi">Fake Job Awareness</h3>
+<p data-en="Recognise suspicious job offers and recruitment scams."
+data-fr="Reconnaissez les offres d'emploi suspectes et les arnaques au recrutement.">
+Recognise suspicious job offers and recruitment scams.
+</p>
+<button class="button green" onclick="showPage('learn')"
+data-en="Learn More" data-fr="En savoir plus">Learn More</button>
+</div>
+
+<div class="card">
+<div class="card-icon">🔐</div>
+<h3 data-en="Online Security" data-fr="Sécurité en ligne">Online Security</h3>
+<p data-en="Protect your passwords, personal information and digital identity."
+data-fr="Protégez vos mots de passe, vos informations personnelles et votre identité numérique.">
+Protect your passwords, personal information and digital identity.
+</p>
+<button class="button green" onclick="showPage('learn')"
+data-en="Learn More" data-fr="En savoir plus">Learn More</button>
+</div>
+</div>
+
+<div class="notice">
+<strong data-en="Remember:" data-fr="Rappelez-vous :">Remember:</strong>
+<span data-en="Never share your Mobile Money PIN, password or verification code with anyone."
+data-fr="Ne partagez jamais votre code PIN Mobile Money, votre mot de passe ou votre code de vérification.">
+Never share your Mobile Money PIN, password or verification code with anyone.
+</span>
+</div>
 </section>
 
+<!-- LEARN -->
 <section id="learn" class="panel">
-  <h2 data-key="learnTitle">Learn About Scams</h2>
+<div class="section-title">
+<h2 data-en="Learn to Stay Safe" data-fr="Apprenez à rester en sécurité">Learn to Stay Safe</h2>
+<p data-en="Knowledge is your first protection."
+data-fr="La connaissance est votre première protection.">
+Knowledge is your first protection.
+</p>
+</div>
 
-  <div class="card">
-    <h3 data-key="momoTitle">📱 Mobile Money Scams</h3>
-    <p data-key="momoText">Scammers may pretend to be Mobile Money agents or send fake payment messages to trick you.</p>
-    <p><strong data-key="protect">How to protect yourself:</strong></p>
-    <ul>
-      <li data-key="momoTip1">Check your actual account balance before trusting a payment message.</li>
-      <li data-key="momoTip2">Never share your PIN or secret codes.</li>
-      <li data-key="momoTip3">Contact your mobile network using its official support channel.</li>
-    </ul>
-  </div>
+<div class="grid">
+<div class="card">
+<div class="card-icon">📲</div>
+<h3>Mobile Money Scams</h3>
+<p data-en="Fraudsters may pretend to be agents, relatives or service providers. They may ask you to reveal your PIN or send money."
+data-fr="Les fraudeurs peuvent se faire passer pour des agents, des proches ou des prestataires. Ils peuvent vous demander votre code PIN ou de l'argent.">
+Fraudsters may pretend to be agents, relatives or service providers. They may ask you to reveal your PIN or send money.
+</p>
+<strong data-en="Protection:" data-fr="Protection :">Protection:</strong>
+<p data-en="Never reveal your PIN. Confirm transactions using official channels."
+data-fr="Ne révélez jamais votre code PIN. Vérifiez les transactions par les canaux officiels.">
+Never reveal your PIN. Confirm transactions using official channels.
+</p>
+</div>
 
-  <div class="card">
-    <h3 data-key="jobTitle">💼 Fake Job Offers</h3>
-    <p data-key="jobText">Fraudsters may promise high salaries or jobs abroad and demand money before giving you a job.</p>
-    <p><strong data-key="protect">How to protect yourself:</strong></p>
-    <ul>
-      <li data-key="jobTip1">Verify the company and its official contact details.</li>
-      <li data-key="jobTip2">Be careful when someone demands a registration fee urgently.</li>
-      <li data-key="jobTip3">Do not send your passport or personal documents to unknown people.</li>
-    </ul>
-  </div>
+<div class="card">
+<div class="card-icon">💼</div>
+<h3 data-en="Fake Job Offers" data-fr="Fausses offres d'emploi">Fake Job Offers</h3>
+<p data-en="Scammers may promise high salaries and guaranteed jobs in exchange for registration fees."
+data-fr="Les fraudeurs peuvent promettre de gros salaires et des emplois garantis contre des frais d'inscription.">
+Scammers may promise high salaries and guaranteed jobs in exchange for registration fees.
+</p>
+<strong data-en="Protection:" data-fr="Protection :">Protection:</strong>
+<p data-en="Verify the employer, company address and official recruitment process before paying."
+data-fr="Vérifiez l'employeur, l'adresse de l'entreprise et le processus de recrutement avant de payer.">
+Verify the employer, company address and official recruitment process before paying.
+</p>
+</div>
 
-  <div class="card">
-    <h3 data-key="shoppingTitle">🛒 Online Shopping Scams</h3>
-    <p data-key="shoppingText">Fake sellers may advertise products online, collect payment and disappear.</p>
-    <p><strong data-key="protect">How to protect yourself:</strong></p>
-    <ul>
-      <li data-key="shoppingTip1">Check seller reviews and independent information.</li>
-      <li data-key="shoppingTip2">Be suspicious of prices that are too good to be true.</li>
-      <li data-key="shoppingTip3">Use safer payment methods when available.</li>
-    </ul>
-  </div>
+<div class="card">
+<div class="card-icon">❤️</div>
+<h3>Romance Scams</h3>
+<p data-en="Someone you meet online may build trust and later request money or financial help."
+data-fr="Une personne rencontrée en ligne peut gagner votre confiance puis demander de l'argent.">
+Someone you meet online may build trust and later request money or financial help.
+</p>
+<strong data-en="Protection:" data-fr="Protection :">Protection:</strong>
+<p data-en="Do not send money to people you have not properly verified."
+data-fr="N'envoyez pas d'argent à des personnes que vous n'avez pas correctement vérifiées.">
+Do not send money to people you have not properly verified.
+</p>
+</div>
 
-  <div class="card">
-    <h3 data-key="investmentTitle">📈 Investment Scams</h3>
-    <p data-key="investmentText">Some scammers promise guaranteed profits or unusually high returns.</p>
-    <p><strong data-key="protect">How to protect yourself:</strong></p>
-    <ul>
-      <li data-key="investmentTip1">Avoid investments promising guaranteed profits.</li>
-      <li data-key="investmentTip2">Research the company before sending money.</li>
-      <li data-key="investmentTip3">Never invest money you cannot afford to lose.</li>
-    </ul>
-  </div>
+<div class="card">
+<div class="card-icon">🔗</div>
+<h3>Phishing Links</h3>
+<p data-en="Fake links may imitate banks, delivery companies or official websites to steal your information."
+data-fr="Les faux liens peuvent imiter des banques ou des sites officiels pour voler vos informations.">
+Fake links may imitate banks, delivery companies or official websites to steal your information.
+</p>
+<strong data-en="Protection:" data-fr="Protection :">Protection:</strong>
+<p data-en="Avoid unknown links. Check the website address before entering personal details."
+data-fr="Évitez les liens inconnus. Vérifiez l'adresse du site avant de saisir vos informations.">
+Avoid unknown links. Check the website address before entering personal details.
+</p>
+</div>
+</div>
 </section>
 
-<section id="tips" class="panel">
-  <h2 data-key="tipsTitle">Important Safety Tips</h2>
+<!-- SCAM CHECKER -->
+<section id="checker" class="panel">
+<div class="section-title">
+<h2 data-en="Scam Message Checker" data-fr="Vérificateur de messages suspects">Scam Message Checker</h2>
+<p data-en="Paste a suspicious message to check for warning signs."
+data-fr="Collez un message suspect pour rechercher des signes d'arnaque.">
+Paste a suspicious message to check for warning signs.
+</p>
+</div>
 
-  <div class="card">
-    <h3 data-key="tip1Title">🔐 Protect Your Information</h3>
-    <p data-key="tip1Text">Keep your passwords, PINs and verification codes private.</p>
-  </div>
+<div class="card">
+<label data-en="Paste your message here:" data-fr="Collez votre message ici :">Paste your message here:</label>
+<textarea id="scamText" placeholder="Paste a suspicious SMS, WhatsApp message or job offer..."></textarea>
 
-  <div class="card">
-    <h3 data-key="tip2Title">📩 Check Suspicious Messages</h3>
-    <p data-key="tip2Text">Do not click unknown links or download suspicious attachments.</p>
-  </div>
+<button class="button green" onclick="checkScam()"
+data-en="Analyze Message" data-fr="Analyser le message">
+Analyze Message
+</button>
 
-  <div class="card">
-    <h3 data-key="tip3Title">💰 Think Before Paying</h3>
-    <p data-key="tip3Text">Verify requests for money before sending funds to anyone.</p>
-  </div>
+<button class="button" onclick="clearChecker()"
+data-en="Clear" data-fr="Effacer">Clear</button>
 
-  <div class="card">
-    <h3 data-key="tip4Title">📞 Ask for Help</h3>
-    <p data-key="tip4Text">Contact your bank, mobile network or the appropriate authorities through official channels if you suspect fraud.</p>
-  </div>
+<div id="checkerResult" class="result"></div>
+</div>
+
+<div class="notice">
+<strong data-en="Important:" data-fr="Important :">Important:</strong>
+<span data-en="This is a basic keyword-based educational checker. It cannot prove whether a message is genuine or fraudulent."
+data-fr="Ce vérificateur pédagogique utilise des mots-clés simples. Il ne peut pas prouver qu'un message est authentique ou frauduleux.">
+This is a basic keyword-based educational checker. It cannot prove whether a message is genuine or fraudulent.
+</span>
+</div>
 </section>
 
+<!-- REPORT -->
 <section id="report" class="panel">
-  <h2 data-key="reportTitle">Report a Scam</h2>
-  <p data-key="reportIntro">Describe a suspicious incident below.</p>
+<div class="section-title">
+<h2 data-en="Report a Scam" data-fr="Signaler une arnaque">Report a Scam</h2>
+<p data-en="Help raise awareness about suspicious activities."
+data-fr="Aidez à sensibiliser le public aux activités suspectes.">
+Help raise awareness about suspicious activities.
+</p>
+</div>
 
-  <form id="reportForm" onsubmit="submitReport(event)">
-    <label for="reportName" data-key="nameLabel">Your name (optional)</label>
-    <input id="reportName" maxlength="60" placeholder="Your name">
+<div class="card">
+<form id="reportForm">
+<label data-en="Type of scam" data-fr="Type d'arnaque">Type of scam</label>
+<select id="reportType" required>
+<option value="Mobile Money">Mobile Money</option>
+<option value="Fake Job">Fake Job</option>
+<option value="Romance Scam">Romance Scam</option>
+<option value="Online Shopping">Online Shopping</option>
+<option value="Phishing">Phishing</option>
+<option value="Other">Other</option>
+</select>
 
-    <label for="reportType" data-key="typeLabel">Type of scam</label>
-    <select id="reportType" required>
-      <option value="" data-key="choose">Choose scam type</option>
-      <option value="momo" data-key="typeMomo">Mobile Money scam</option>
-      <option value="job" data-key="typeJob">Fake job offer</option>
-      <option value="shopping" data-key="typeShopping">Online shopping scam</option>
-      <option value="investment" data-key="typeInvestment">Investment scam</option>
-      <option value="other" data-key="typeOther">Other</option>
-    </select>
+<label data-en="Describe what happened" data-fr="Décrivez ce qui s'est passé">Describe what happened</label>
+<textarea id="reportDetails" required placeholder="Describe the suspicious activity..."></textarea>
 
-    <label for="reportDetails" data-key="detailsLabel">What happened?</label>
-    <textarea id="reportDetails" rows="5" maxlength="2000" required></textarea>
+<label data-en="Your contact (optional)" data-fr="Votre contact (facultatif)">Your contact (optional)</label>
+<input id="reportContact" type="text" placeholder="Phone or email">
 
-    <button class="submit" type="submit" data-key="submitButton">Submit Report</button>
-  </form>
+<div class="notice">
+<span data-en="Do not include your PIN, password, bank details or other sensitive information."
+data-fr="N'incluez pas votre code PIN, mot de passe, coordonnées bancaires ou autres informations sensibles.">
+Do not include your PIN, password, bank details or other sensitive information.
+</span>
+</div>
 
-  <p class="note" data-key="privacyNote">Demo only: reports are saved in this browser on this device. They are not sent to the police or any authority.</p>
-
-  <div id="reportResult" aria-live="polite"></div>
+<button class="button green" type="submit"
+data-en="Submit Report" data-fr="Envoyer le signalement">
+Submit Report
+</button>
+</form>
+<div id="reportResult"></div>
+<p class="small" data-en="Demonstration only: reports are not transmitted or stored on a server yet."
+data-fr="Démonstration uniquement : les signalements ne sont pas encore transmis ni enregistrés sur un serveur.">
+Demonstration only: reports are not transmitted or stored on a server yet.
+</p>
+</div>
 </section>
 
-<section id="history" class="panel">
-  <h2 data-key="historyTitle">My Reports</h2>
-  <p data-key="historyIntro">Reports saved on this device appear here.</p>
-  <div id="reportHistory"></div>
-  <button class="danger" onclick="clearReports()" data-key="clearButton">Delete All Reports</button>
-  <p class="note" data-key="historyNote">Deleting browser data or changing devices may remove or hide these reports.</p>
+<!-- ABOUT -->
+<section id="about" class="panel">
+<div class="section-title">
+<h2 data-en="About SafeLearn Ghana" data-fr="À propos de SafeLearn Ghana">About SafeLearn Ghana</h2>
+</div>
+
+<div class="card">
+<h3 data-en="Our Mission" data-fr="Notre mission">Our Mission</h3>
+<p data-en="SafeLearn Ghana is an independent digital awareness initiative designed to educate people about online scams, digital security and financial fraud prevention."
+data-fr="SafeLearn Ghana est une initiative indépendante de sensibilisation numérique destinée à informer le public sur les arnaques en ligne, la sécurité numérique et la prévention des fraudes financières.">
+SafeLearn Ghana is an independent digital awareness initiative designed to educate people about online scams, digital security and financial fraud prevention.
+</p>
+
+<h3 data-en="Our Vision" data-fr="Notre vision">Our Vision</h3>
+<p data-en="A safer and more informed digital community in Ghana."
+data-fr="Une communauté numérique plus sûre et mieux informée au Ghana.">
+A safer and more informed digital community in Ghana.
+</p>
+
+<h3 data-en="Our Independence" data-fr="Notre indépendance">Our Independence</h3>
+<p data-en="SafeLearn Ghana is an independent project. It aims to promote public education and may seek professional advice and cooperation from relevant institutions."
+data-fr="SafeLearn Ghana est un projet indépendant. Il vise à promouvoir l'éducation du public et pourra rechercher des conseils professionnels et une coopération avec les institutions concernées.">
+SafeLearn Ghana is an independent project. It aims to promote public education and may seek professional advice and cooperation from relevant institutions.
+</p>
+
+<div class="notice">
+<strong>SafeLearn Ghana</strong><br>
+<span data-en="Educate. Prevent. Protect."
+data-fr="Informer. Prévenir. Protéger.">
+Educate. Prevent. Protect.
+</span>
+</div>
+</div>
 </section>
 
 </main>
 
 <footer>
-  <p><strong>SafeLearn Ghana 🇬🇭</strong></p>
-  <p data-key="footerText">Learn. Identify. Prevent Scams.</p>
-  <p>© 2026 SafeLearn Ghana</p>
+<div class="logo">SAFE<span>LEARN</span> GHANA</div>
+<p data-en="Educate. Prevent. Protect."
+data-fr="Informer. Prévenir. Protéger.">
+Educate. Prevent. Protect.
+</p>
+<p>© 2026 SafeLearn Ghana. All rights reserved.</p>
+<p class="small" style="color:#d7e9dd">
+Independent digital safety awareness project.
+</p>
 </footer>
 
 <script>
-const translations = {
-  en: {
-    tagline:"Learn. Identify. Prevent Scams.",
-    languageLabel:"Choose language:",
-    navHome:"Home", navLearn:"Learn", navTips:"Safety Tips",
-    navReport:"Report Scam", navHistory:"My Reports",
-    welcome:"Welcome to SafeLearn Ghana",
-    intro:"A platform that helps people recognize, understand and avoid online scams.",
-    startLearning:"Start Learning", reportNow:"Report a Scam",
-    missionTitle:"Our Mission",
-    missionText:"To educate and protect people in Ghana against online fraud and financial scams.",
-    warningTitle:"Stay Alert!",
-    warningText:"Never share your Mobile Money PIN, password or verification code with strangers.",
-    learnTitle:"Learn About Scams",
-    momoTitle:"📱 Mobile Money Scams",
-    momoText:"Scammers may pretend to be Mobile Money agents or send fake payment messages to trick you.",
-    protect:"How to protect yourself:",
-    momoTip1:"Check your actual account balance before trusting a payment message.",
-    momoTip2:"Never share your PIN or secret codes.",
-    momoTip3:"Contact your mobile network using its official support channel.",
-    jobTitle:"💼 Fake Job Offers",
-    jobText:"Fraudsters may promise high salaries or jobs abroad and demand money before giving you a job.",
-    jobTip1:"Verify the company and its official contact details.",
-    jobTip2:"Be careful when someone demands a registration fee urgently.",
-    jobTip3:"Do not send your passport or personal documents to unknown people.",
-    shoppingTitle:"🛒 Online Shopping Scams",
-    shoppingText:"Fake sellers may advertise products online, collect payment and disappear.",
-    shoppingTip1:"Check seller reviews and independent information.",
-    shoppingTip2:"Be suspicious of prices that are too good to be true.",
-    shoppingTip3:"Use safer payment methods when available.",
-    investmentTitle:"📈 Investment Scams",
-    investmentText:"Some scammers promise guaranteed profits or unusually high returns.",
-    investmentTip1:"Avoid investments promising guaranteed profits.",
-    investmentTip2:"Research the company before sending money.",
-    investmentTip3:"Never invest money you cannot afford to lose.",
-    tipsTitle:"Important Safety Tips",
-    tip1Title:"🔐 Protect Your Information",
-    tip1Text:"Keep your passwords, PINs and verification codes private.",
-    tip2Title:"📩 Check Suspicious Messages",
-    tip2Text:"Do not click unknown links or download suspicious attachments.",
-    tip3Title:"💰 Think Before Paying",
-    tip3Text:"Verify requests for money before sending funds to anyone.",
-    tip4Title:"📞 Ask for Help",
-    tip4Text:"Contact your bank, mobile network or the appropriate authorities through official channels if you suspect fraud.",
-    reportTitle:"Report a Scam",
-    reportIntro:"Describe a suspicious incident below.",
-    nameLabel:"Your name (optional)",
-    typeLabel:"Type of scam",
-    choose:"Choose scam type",
-    typeMomo:"Mobile Money scam",
-    typeJob:"Fake job offer",
-    typeShopping:"Online shopping scam",
-    typeInvestment:"Investment scam",
-    typeOther:"Other",
-    detailsLabel:"What happened?",
-    submitButton:"Submit Report",
-    privacyNote:"Demo only: reports are saved in this browser on this device. They are not sent to the police or any authority.",
-    historyTitle:"My Reports",
-    historyIntro:"Reports saved on this device appear here.",
-    clearButton:"Delete All Reports",
-    historyNote:"Deleting browser data or changing devices may remove or hide these reports.",
-    footerText:"Learn. Identify. Prevent Scams.",
-    recorded:"Your report has been saved on this device.",
-    emptyHistory:"No reports saved yet.",
-    reportType:"Scam type:",
-    reportDate:"Date:",
-    reportDetails:"Details:",
-    anonymous:"Anonymous",
-    deleteOne:"Delete",
-    confirmDelete:"Delete this report?",
-    confirmAll:"Are you sure you want to delete all saved reports?",
-    storageError:"Sorry, this browser could not save your report. Check your browser settings.",
-    fillForm:"Please complete the required fields."
-  },
+let currentLanguage = "en";
 
-  fr: {
-    tagline:"Apprendre. Identifier. Prévenir les arnaques.",
-    languageLabel:"Choisir la langue :",
-    navHome:"Accueil", navLearn:"Apprendre", navTips:"Conseils",
-    navReport:"Signaler", navHistory:"Mes signalements",
-    welcome:"Bienvenue sur SafeLearn Ghana",
-    intro:"Une plateforme qui aide chacun à reconnaître, comprendre et éviter les arnaques en ligne.",
-    startLearning:"Commencer", reportNow:"Signaler une arnaque",
-    missionTitle:"Notre mission",
-    missionText:"Informer et protéger les populations du Ghana contre la fraude en ligne et les arnaques financières.",
-    warningTitle:"Restez vigilant !",
-    warningText:"Ne partagez jamais votre code PIN Mobile Money, votre mot de passe ou vos codes de vérification.",
-    learnTitle:"Apprendre à reconnaître les arnaques",
-    momoTitle:"📱 Arnaques Mobile Money",
-    momoText:"Les escrocs peuvent se faire passer pour des agents Mobile Money ou envoyer de faux messages de paiement.",
-    protect:"Comment vous protéger :",
-    momoTip1:"Vérifiez votre solde réel avant de croire un message de paiement.",
-    momoTip2:"Ne partagez jamais votre PIN ou vos codes secrets.",
-    momoTip3:"Contactez votre opérateur par son canal officiel.",
-    jobTitle:"💼 Fausses offres d'emploi",
-    jobText:"Des fraudeurs promettent de bons salaires ou des emplois à l'étranger et demandent de l'argent à l'avance.",
-    jobTip1:"Vérifiez l'entreprise et ses coordonnées officielles.",
-    jobTip2:"Méfiez-vous des demandes urgentes de frais d'inscription.",
-    jobTip3:"N'envoyez pas votre passeport ou vos documents à des inconnus.",
-    shoppingTitle:"🛒 Arnaques aux achats en ligne",
-    shoppingText:"De faux vendeurs publient des produits, encaissent l'argent puis disparaissent.",
-    shoppingTip1:"Vérifiez les avis et les informations indépendantes sur le vendeur.",
-    shoppingTip2:"Méfiez-vous des prix trop beaux pour être vrais.",
-    shoppingTip3:"Utilisez des moyens de paiement plus sûrs lorsqu'ils sont disponibles.",
-    investmentTitle:"📈 Arnaques aux investissements",
-    investmentText:"Certains escrocs promettent des bénéfices garantis ou des rendements très élevés.",
-    investmentTip1:"Évitez les investissements qui promettent des profits garantis.",
-    investmentTip2:"Renseignez-vous sur l'entreprise avant d'envoyer de l'argent.",
-    investmentTip3:"N'investissez jamais de l'argent que vous ne pouvez pas perdre.",
-    tipsTitle:"Conseils importants de sécurité",
-    tip1Title:"🔐 Protégez vos informations",
-    tip1Text:"Gardez vos mots de passe, PIN et codes de vérification secrets.",
-    tip2Title:"📩 Vérifiez les messages suspects",
-    tip2Text:"Ne cliquez pas sur des liens inconnus et ne téléchargez pas de pièces jointes suspectes.",
-    tip3Title:"💰 Réfléchissez avant de payer",
-    tip3Text:"Vérifiez toute demande d'argent avant d'envoyer des fonds.",
-    tip4Title:"📞 Demandez de l'aide",
-    tip4Text:"En cas de fraude suspectée, contactez votre banque, votre opérateur ou les autorités compétentes par leurs canaux officiels.",
-    reportTitle:"Signaler une arnaque",
-    reportIntro:"Décrivez ci-dessous un incident suspect.",
-    nameLabel:"Votre nom (facultatif)",
-    typeLabel:"Type d'arnaque",
-    choose:"Choisir le type d'arnaque",
-    typeMomo:"Arnaque Mobile Money",
-    typeJob:"Fausse offre d'emploi",
-    typeShopping:"Arnaque aux achats en ligne",
-    typeInvestment:"Arnaque à l'investissement",
-    typeOther:"Autre",
-    detailsLabel:"Que s'est-il passé ?",
-    submitButton:"Envoyer le signalement",
-    privacyNote:"Démo uniquement : les signalements sont enregistrés dans ce navigateur sur cet appareil. Ils ne sont envoyés ni à la police ni à une autorité.",
-    historyTitle:"Mes signalements",
-    historyIntro:"Les signalements enregistrés sur cet appareil apparaissent ici.",
-    clearButton:"Supprimer tous les signalements",
-    historyNote:"La suppression des données du navigateur ou le changement d'appareil peut faire disparaître ces signalements.",
-    footerText:"Apprendre. Identifier. Prévenir les arnaques.",
-    recorded:"Votre signalement a été enregistré sur cet appareil.",
-    emptyHistory:"Aucun signalement enregistré pour le moment.",
-    reportType:"Type d'arnaque :",
-    reportDate:"Date :",
-    reportDetails:"Détails :",
-    anonymous:"Anonyme",
-    deleteOne:"Supprimer",
-    confirmDelete:"Supprimer ce signalement ?",
-    confirmAll:"Voulez-vous vraiment supprimer tous les signalements ?",
-    storageError:"Désolé, le navigateur n'a pas pu enregistrer votre signalement. Vérifiez ses paramètres.",
-    fillForm:"Veuillez remplir les champs obligatoires."
-  },
-
-  tw: {
-    tagline:"Sua. Hu. Si nsisi ano.",
-    languageLabel:"Paw kasa:",
-    navHome:"Fie", navLearn:"Sua", navTips:"Afotu",
-    navReport:"Bɔ amanneɛ", navHistory:"M'amanneɛ",
-    welcome:"Akwaaba wɔ SafeLearn Ghana",
-    intro:"Beae a ɛboa nnipa ma wohu nnaadaa wɔ intanɛt so na wɔkwati.",
-    startLearning:"Fi ase sua", reportNow:"Bɔ amanneɛ",
-    missionTitle:"Yɛn botae",
-    missionText:"Yɛpɛ sɛ yɛkyerɛkyerɛ na yɛbɔ nnipa a wɔwɔ Ghana ho ban fi intanɛt so nnaadaa ho.",
-    warningTitle:"Hwɛ yiye!",
-    warningText:"Mfa wo Mobile Money PIN, password anaa ahintasɛm nɔma mma obiara.",
-    learnTitle:"Sua nnaadaa ho ade",
-    momoTitle:"📱 Mobile Money nnaadaa",
-    momoText:"Nnaadaafo betumi ayɛ wɔn ho sɛ Mobile Money adwumayɛfo anaa wɔde sika a wɔmfa ampa ho nkrasɛm bɛbrɛ wo.",
-    protect:"Sɛnea wobɛbɔ wo ho ban:",
-    momoTip1:"Hwɛ wo sika ankasa ansa na woagye nkrasɛm bi adi.",
-    momoTip2:"Mma obiara wo PIN anaa wo ahintasɛm nɔma.",
-    momoTip3:"Frɛ wo telefon adwumakuw wɔ wɔn kwan a ɛyɛ nokware so.",
-    jobTitle:"💼 Adwuma ho nnaadaa",
-    jobText:"Nnaadaafo betumi ahyɛ wo bɔ sɛ wɔbɛma wo adwuma pa na wɔabisa sika ansa na wɔama wo adwuma.",
-    jobTip1:"Hwehwɛ adwumakuw no ho nokwasɛm.",
-    jobTip2:"Hwɛ yiye wɔ wɔn a wɔhwehwɛ registration fee ntɛm no ho.",
-    jobTip3:"Mfa wo passport anaa wo nkrataa mma ahɔho.",
-    shoppingTitle:"🛒 Intanɛt so adetɔ nnaadaa",
-    shoppingText:"Adetɔnfo atoro betumi agye wo sika na wɔayera.",
-    shoppingTip1:"Hwɛ adetɔnfo no ho nsɛm ne wɔn a wɔatɔ ade afi wɔn hɔ no nsɛm.",
-    shoppingTip2:"Hwɛ yiye wɔ nneɛma a ne bo yɛ mmerɛw dodo ho.",
-    shoppingTip3:"Fa akwan a ahobammɔ wom tua sika bere a ɛbɛyɛ yiye.",
-    investmentTitle:"📈 Sika a wɔde hyɛ adwuma mu nnaadaa",
-    investmentText:"Nnaadaafo binom hyɛ bɔ sɛ wobɛnya mfaso a ɛyɛ den sɛ ɛbɛba.",
-    investmentTip1:"Nnye sika a wɔahyɛ wo bɔ sɛ mfaso no yɛ nokware no nni.",
-    investmentTip2:"Hwehwɛ adwumakuw no ho nsɛm ansa na wode sika akɔ.",
-    investmentTip3:"Mfa sika a wuntumi nnyae no nhyɛ adwuma biara mu.",
-    tipsTitle:"Ahobammɔ ho afotu",
-    tip1Title:"🔐 Bɔ wo nsɛm ho ban",
-    tip1Text:"Kora wo password, PIN ne ahintasɛm nɔma wɔ kokoam.",
-    tip2Title:"📩 Hwɛ nkrasɛm a ɛyɛ nwanwa",
-    tip2Text:"Mfa wo nsa nka links a wunnim na mmue fael a ɛyɛ nwanwa.",
-    tip3Title:"💰 Dwinnwen ansa na woatua sika",
-    tip3Text:"Hwehwɛ sika ho adesrɛ biara mu ansa na wode sika akɔ.",
-    tip4Title:"📞 Bisa mmoa",
-    tip4Text:"Sɛ wususuw sɛ nnaadaa aba a, frɛ wo sikakorabea anaa telefon adwumakuw wɔ wɔn kwan a ɛyɛ nokware so.",
-    reportTitle:"Bɔ nnaadaa ho amanneɛ",
-    reportIntro:"Kyerɛw nea ɛyɛɛ a wosusuw sɛ ɛyɛ nnaadaa no.",
-    nameLabel:"Wo din (ɛnyɛ den sɛ wobɛkyerɛ)",
-    typeLabel:"Nnaadaa no su",
-    choose:"Paw nnaadaa no su",
-    typeMomo:"Mobile Money nnaadaa",
-    typeJob:"Adwuma ho nnaadaa",
-    typeShopping:"Intanɛt so adetɔ nnaadaa",
-    typeInvestment:"Sika a wɔde hyɛ adwuma mu nnaadaa",
-    typeOther:"Afoforo",
-    detailsLabel:"Dɛn na ɛsii?",
-    submitButton:"Fa amanneɛ no kɔ",
-    privacyNote:"Sɔhwɛ nko ara: wɔde amanneɛ no sie wo fon so wɔ browser yi mu. Ɛnkɔ polisifo anaa aban adwumayɛfo hɔ.",
-    historyTitle:"M'amanneɛ",
-    historyIntro:"Amanneɛ a wɔakora wɔ saa fon yi so bɛda ha.",
-    clearButton:"Pepa amanneɛ nyinaa",
-    historyNote:"Sɛ wopopa browser data anaa wode fon foforo di dwuma a, amanneɛ no betumi ayera.",
-    footerText:"Sua. Hu. Si nsisi ano.",
-    recorded:"Wɔakora wo amanneɛ no wɔ saa fon yi so.",
-    emptyHistory:"Wonni amanneɛ biara a wɔakora so.",
-    reportType:"Nnaadaa no su:",
-    reportDate:"Da:",
-    reportDetails:"Nsɛm:",
-    anonymous:"Din nni mu",
-    deleteOne:"Pepa",
-    confirmDelete:"Wopɛ sɛ wopopa amanneɛ yi?",
-    confirmAll:"Wopɛ ampa sɛ wopopa amanneɛ nyinaa?",
-    storageError:"Yɛsrɛ wo, browser no antumi ankora amanneɛ no. Hwɛ browser no nhyehyɛe.",
-    fillForm:"Yɛsrɛ wo, hyɛ mmeae a ɛho hia no ma."
-  }
-};
-
-function changeLanguage() {
-  const lang = document.getElementById("language").value;
-  const words = translations[lang];
-
-  document.documentElement.lang = lang === "tw" ? "ak" : lang;
-
-  document.getElementById("tagline").textContent = words.tagline;
-
-  document.querySelectorAll("[data-key]").forEach(element => {
-    const key = element.getAttribute("data-key");
-    if (words[key]) {
-      element.textContent = words[key];
-    }
+function showPage(id,button){
+  document.querySelectorAll(".panel").forEach(p=>{
+    p.classList.remove("active");
   });
 
-  renderHistory();
+  const page=document.getElementById(id);
+  if(page) page.classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  if(button) button.classList.add("active");
+
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function showPage(id, button) {
-  document.querySelectorAll(".panel").forEach(panel => {
-    panel.classList.remove("active");
+function toggleLanguage(){
+  currentLanguage=currentLanguage==="en"?"fr":"en";
+
+  document.documentElement.lang=currentLanguage;
+
+  document.querySelectorAll("[data-en]").forEach(element=>{
+    element.textContent=element.getAttribute("data-"+currentLanguage);
   });
 
-  const selectedPage = document.getElementById(id);
-  if (selectedPage) {
-    selectedPage.classList.add("active");
-  }
-
-  document.querySelectorAll("nav button").forEach(btn => {
-    btn.classList.remove("active");
-  });
-
-  if (button) {
-    button.classList.add("active");
-  } else {
-    const navButton = document.querySelector(
-      'nav button[onclick*="' + id + '"]'
-    );
-    if (navButton) navButton.classList.add("active");
-  }
-
-  if (id === "history") renderHistory();
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  document.getElementById("langBtn").textContent=
+    currentLanguage==="en"?"FR 🇫🇷":"EN 🇬🇧";
 }
 
-function getReports() {
-  try {
-    return JSON.parse(localStorage.getItem("safeLearnReports") || "[]");
-  } catch (error) {
-    return [];
+function checkScam(){
+  const message=document.getElementById("scamText").value.trim();
+  const result=document.getElementById("checkerResult");
+
+  if(!message){
+    result.innerHTML="<div class='danger'>Please enter a message first.</div>";
+    return;
+  }
+
+  const keywords=[
+    "send money","registration fee","pay now",
+    "urgent payment","claim your prize","you won",
+    "share your pin","mobile money pin","verification code",
+    "password","investment guaranteed","double your money",
+    "limited offer","account blocked","click this link",
+    "frais d'inscription","envoyez de l'argent",
+    "vous avez gagné","code pin","mot de passe",
+    "investissement garanti","cliquez ici"
+  ];
+
+  const lower=message.toLowerCase();
+  const found=keywords.filter(word=>lower.includes(word));
+
+  if(found.length>0){
+    result.innerHTML=
+    "<div class='danger'><h3>⚠️ Warning Signs Detected</h3>"+
+    "<p>This message contains suspicious terms: <strong>"+
+    found.join(", ")+
+    "</strong></p><p>Do not send money or share private information. Verify the sender independently.</p></div>";
+  }else{
+    result.innerHTML=
+    "<div class='success'><h3>🔎 No Listed Warning Keywords Found</h3>"+
+    "<p>This does not mean the message is safe. Scams can use many different words and methods. Verify independently.</p></div>";
   }
 }
 
-function submitReport(event) {
+function clearChecker(){
+  document.getElementById("scamText").value="";
+  document.getElementById("checkerResult").innerHTML="";
+}
+
+document.getElementById("reportForm").addEventListener("submit",function(event){
   event.preventDefault();
 
-  const lang = document.getElementById("language").value;
-  const words = translations[lang];
+  const result=document.getElementById("reportResult");
 
-  const report = {
-    id: Date.now().toString() + Math.random().toString(16).slice(2),
-    name: document.getElementById("reportName").value.trim(),
-    type: document.getElementById("reportType").value,
-    details: document.getElementById("reportDetails").value.trim(),
-    date: new Date().toLocaleString()
-  };
+  result.innerHTML=
+  "<div class='success'><strong>Demo submission received on this page.</strong><br>"+
+  "No report has been sent to an authority or saved on a server. A secure reporting system must be connected before public launch.</div>";
 
-  if (!report.type || !report.details) {
-    document.getElementById("reportResult").textContent = words.fillForm;
-    return;
-  }
-
-  try {
-    const reports = getReports();
-    reports.push(report);
-
-    localStorage.setItem("safeLearnReports", JSON.stringify(reports));
-
-    document.getElementById("reportResult").textContent = words.recorded;
-    event.target.reset();
-    renderHistory();
-  } catch (error) {
-    document.getElementById("reportResult").textContent = words.storageError;
-  }
-}
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[character]);
-}
-
-function renderHistory() {
-  const container = document.getElementById("reportHistory");
-  if (!container) return;
-
-  const lang = document.getElementById("language").value;
-  const words = translations[lang];
-  const reports = getReports();
-
-  if (reports.length === 0) {
-    container.textContent = words.emptyHistory;
-    return;
-  }
-
-  container.innerHTML = "";
-
-  reports.slice().reverse().forEach(report => {
-    const typeLabels = {
-      momo: words.typeMomo,
-      job: words.typeJob,
-      shopping: words.typeShopping,
-      investment: words.typeInvestment,
-      other: words.typeOther
-    };
-
-    const item = document.createElement("div");
-    item.className = "report-item";
-
-    item.innerHTML =
-      "<h3>" + escapeHTML(typeLabels[report.type] || words.typeOther) + "</h3>" +
-      "<p><strong>" + escapeHTML(words.nameLabel) + ":</strong> " +
-      escapeHTML(report.name || words.anonymous) + "</p>" +
-      "<p><strong>" + escapeHTML(words.reportDate) + "</strong> " +
-      escapeHTML(report.date) + "</p>" +
-      "<p><strong>" + escapeHTML(words.reportDetails) + "</strong><br>" +
-      escapeHTML(report.details).replace(/\n/g, "<br>") + "</p>";
-
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "danger";
-    deleteButton.textContent = words.deleteOne;
-    deleteButton.onclick = () => deleteReport(report.id);
-
-    item.appendChild(deleteButton);
-    container.appendChild(item);
-  });
-}
-
-function deleteReport(id) {
-  const lang = document.getElementById("language").value;
-
-  if (!confirm(translations[lang].confirmDelete)) return;
-
-  const reports = getReports().filter(report => report.id !== id);
-  localStorage.setItem("safeLearnReports", JSON.stringify(reports));
-  renderHistory();
-}
-
-function clearReports() {
-  const lang = document.getElementById("language").value;
-
-  if (!confirm(translations[lang].confirmAll)) return;
-
-  localStorage.removeItem("safeLearnReports");
-  renderHistory();
-}
-
-changeLanguage();
-renderHistory();
+  this.reset();
+});
 </script>
 
 </body>
