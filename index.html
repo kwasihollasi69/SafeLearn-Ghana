@@ -353,6 +353,25 @@ result.style.display = "block";
         }
     });
 
+// CRITICAL PIN AND OTP PROTECTION
+
+const asksForSecretCode =
+    /(send|share|give|provide|tell|submit|enter|type|text|envoyer|partager|donner|communiquer|saisir|transmettre).{0,45}(pin|otp|password|passcode|verification code|secret code|code secret|mot de passe)/.test(text) ||
+    /(pin|otp|password|passcode|verification code|secret code|code secret|mot de passe).{0,45}(send|share|give|provide|tell|submit|enter|type|text|envoyer|partager|donner|communiquer|saisir|transmettre)/.test(text);
+
+if (asksForSecretCode) {
+    risk += 3;
+    warnings.push("Direct request for a PIN, OTP or password");
+}
+
+const prizeClaim =
+    /you won|winner|free prize|claim your prize|congratulations|vous avez gagne|prix gratuit|reclamer votre prix/.test(text);
+
+if (prizeClaim && asksForSecretCode) {
+    risk += 2;
+    warnings.push("Prize claim used to obtain confidential information");
+}
+
     // Special combination: suspicious MoMo deposit
     const momoDeposit =
         /momo|mobile money|mtn|telecel cash|vodafone cash/.test(text);
