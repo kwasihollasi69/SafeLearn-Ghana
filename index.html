@@ -1,215 +1,464 @@
 
-function checkScam(){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08783d">
+<title>SafeLearn Ghana</title>
 
-  const messageInput = document.getElementById("scamText");
-  const result = document.getElementById("checkerResult");
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f7f3;color:#173b28}
+header{background:linear-gradient(135deg,#07552d,#0b9149);color:white;text-align:center;padding:25px 12px}
+header h1{font-size:29px;margin:0}
+header p{margin:9px 0}
+#language{width:auto;max-width:180px;padding:10px;border-radius:7px}
+nav{display:flex;gap:7px;overflow-x:auto;background:#064b28;padding:12px;position:sticky;top:0;z-index:5}
+nav button{flex-shrink:0;border:0;border-radius:7px;padding:11px;background:white;color:#07552d;font-weight:bold;cursor:pointer}
+nav button.active{background:#f5bd35}
+main{max-width:950px;margin:auto;padding:15px}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:white;border-radius:12px;padding:19px;margin:14px 0;box-shadow:0 3px 12px #00000010}
+.hero{background:#08783d;color:white;padding:25px;border-radius:13px;text-align:center}
+.hero h2{color:white}
+h2,h3{color:#08783d}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.tile{background:white;border-radius:12px;padding:16px;box-shadow:0 3px 10px #00000010;cursor:pointer}
+.tile:hover{border:1px solid #08783d}
+.icon{font-size:28px}
+.action{background:#08783d;color:white;border:0;padding:12px 17px;border-radius:7px;font-weight:bold;cursor:pointer;margin:5px 2px}
+.secondary{background:#e4f1e7;color:#07552d}
+input,textarea,select{width:100%;padding:12px;margin:8px 0 14px;border:1px solid #cbd9ce;border-radius:7px;font-size:15px}
+textarea{min-height:120px}
+label{font-weight:bold}
+.result{display:none;padding:15px;margin-top:14px;border-radius:8px;line-height:1.6;overflow-wrap:anywhere}
+.safe{background:#dff4e4;border-left:5px solid #168344}
+.warning{background:#fff1cf;border-left:5px solid #e0a000}
+.danger{background:#ffe1df;border-left:5px solid #c62828}
+.item{padding:13px;background:#f1f7f3;border-radius:8px;margin:12px 0}
+footer{background:#064b28;color:white;text-align:center;padding:25px;margin-top:30px}
+footer h3{color:#f5bd35}
+.small{font-size:12px;color:#66756a;line-height:1.5}
+a{color:#08783d}
+.quiz-option{display:block;width:100%;text-align:left;background:white;border:1px solid #08783d;border-radius:7px;padding:13px;margin:8px 0;cursor:pointer}
+@media(max-width:500px){header h1{font-size:24px}main{padding:10px}}
+</style>
+</head>
 
-  if(!messageInput || !result){
-    alert("Scam Checker elements not found!");
-    return;
-  }
+<body>
 
-  const message = messageInput.value.trim();
+<header>
+<h1>🛡️ SAFELearn GHANA</h1>
+<p id="tagline">Your Digital Safety Starts Here</p>
+<p>LEARN • DETECT • REPORT • PROTECT</p>
+<select id="language" onchange="changeLanguage(this.value)">
+<option value="en">English</option>
+<option value="fr">Français</option>
+<option value="tw">Twi</option>
+</select>
+</header>
 
-  result.style.display = "block";
-  result.style.padding = "18px";
-  result.style.borderRadius = "10px";
-  result.style.lineHeight = "1.7";
+<nav id="navigation">
+<button class="active" onclick="showPage('home',this)" data-t="home">Home</button>
+<button onclick="showPage('scams',this)" data-t="scams">Scams</button>
+<button onclick="showPage('check',this)" data-t="check">Check Scam</button>
+<button onclick="showPage('report',this)" data-t="report">Report</button>
+<button onclick="showPage('momo',this)" data-t="momo">MoMo</button>
+<button onclick="showPage('tips',this)" data-t="tips">Safety Tips</button>
+<button onclick="showPage('quiz',this)" data-t="quiz">Quiz</button>
+<button onclick="showPage('alerts',this)" data-t="alerts">Alerts</button>
+<button onclick="showPage('contacts',this)" data-t="contacts">Contacts</button>
+</nav>
 
-  // Check empty message
-  if(message === ""){
-    result.style.background = "#fff1d8";
-    result.style.color = "#7a4b00";
+<main>
 
-    result.textContent = currentLanguage === "fr"
-      ? "⚠️ Veuillez entrer un message avant de commencer l'analyse."
-      : "⚠️ Please enter a message before starting the analysis.";
+<!-- HOME -->
+<section id="home" class="panel active">
+<div class="hero">
+<h2 data-t="welcome">Welcome to SafeLearn Ghana</h2>
+<p data-t="intro">An independent digital safety education platform helping people identify and avoid online scams.</p>
+<button class="action" style="background:#f5bd35;color:#173b28" onclick="showPage('check')" data-t="start">Check a Message</button>
+</div>
 
-    return;
-  }
+<h2 data-t="services">Our Services</h2>
+<div class="grid">
+<div class="tile" onclick="showPage('scams')"><div class="icon">🚨</div><h3 data-t="scams">Common Scams</h3></div>
+<div class="tile" onclick="showPage('check')"><div class="icon">🔍</div><h3 data-t="check">Check Scam</h3></div>
+<div class="tile" onclick="showPage('report')"><div class="icon">📝</div><h3 data-t="report">Report Scam</h3></div>
+<div class="tile" onclick="showPage('momo')"><div class="icon">📱</div><h3 data-t="momo">MoMo Safety</h3></div>
+<div class="tile" onclick="showPage('tips')"><div class="icon">🛡️</div><h3 data-t="tips">Safety Tips</h3></div>
+<div class="tile" onclick="showPage('quiz')"><div class="icon">🎓</div><h3 data-t="quiz">Security Quiz</h3></div>
+</div>
 
-  // Normalize message
-  const cleanMessage = message
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+<div class="card">
+<h3 data-t="mission">Our Mission</h3>
+<p data-t="missionText">To educate individuals and communities about digital security and online fraud prevention.</p>
+<p><strong>SafeLearn Ghana</strong> – Independent Digital Safety Project.</p>
+</div>
+</section>
 
-  // Suspicious expressions
-  const suspiciousWords = [
+<!-- SCAMS -->
+<section id="scams" class="panel">
+<div class="card">
+<h2 data-t="scamTitle">Common Scams in Ghana</h2>
+<div class="item"><h3>📱 Mobile Money Fraud</h3><p data-t="s1">Fake payment messages, false transfers and requests for your PIN.</p></div>
+<div class="item"><h3>💼 Fake Job Offers</h3><p data-t="s2">Fraudsters promise employment after collecting registration fees.</p></div>
+<div class="item"><h3>❤️ Romance Scams</h3><p data-t="s3">People create fake relationships to request money.</p></div>
+<div class="item"><h3>🛒 Online Shopping Fraud</h3><p data-t="s4">Fake sellers collect payments without delivering products.</p></div>
+<div class="item"><h3>💰 Investment Scams</h3><p data-t="s5">Promises of guaranteed profits and unrealistic returns.</p></div>
+<div class="item"><h3>🎁 Fake Prize Scams</h3><p data-t="s6">Messages claiming you have won a prize but must pay first.</p></div>
+<div class="item"><h3>🔗 Phishing</h3><p data-t="s7">Fake websites and links designed to steal personal information.</p></div>
+</div>
+</section>
 
-    // Money and Mobile Money scams
-    "send money",
-    "transfer money",
-    "send your money",
-    "mobile money pin",
-    "share your pin",
-    "momo pin",
-    "give me your pin",
-    "verification code",
-    "send otp",
-    "share otp",
-    "urgent payment",
-    "payment required",
-    "refund your money",
+<!-- CHECK SCAM -->
+<section id="check" class="panel">
+<div class="card">
+<h2 data-t="checkTitle">🔍 Scam Analyzer</h2>
+<p data-t="checkDesc">Paste a suspicious message below for a basic security analysis.</p>
+<label data-t="message">Suspicious Message</label>
+<textarea id="scamText" placeholder="Paste SMS, WhatsApp message or suspicious offer here..."></textarea>
+<button class="action" onclick="checkScam()" data-t="analyze">Analyze Message</button>
+<button class="action secondary" onclick="clearCheck()" data-t="clear">Clear</button>
+<div id="checkResult" class="result" aria-live="polite"></div>
+<p class="small" data-t="disclaimer">This tool checks common warning signs. It cannot guarantee that a message is genuine or fraudulent.</p>
+</div>
+</section>
 
-    // Prize scams
-    "you have won",
-    "you won",
-    "claim your prize",
-    "free money",
-    "cash prize",
-    "congratulations winner",
-    "you are selected",
-    "claim reward",
+<!-- REPORT -->
+<section id="report" class="panel">
+<div class="card">
+<h2 data-t="reportTitle">📝 Report a Scam</h2>
+<p data-t="reportDesc">Prepare a record of a suspicious incident.</p>
+<form id="reportForm">
+<label data-t="name">Your Name (Optional)</label>
+<input id="reportName">
+<label data-t="type">Type of Scam</label>
+<select id="reportType" required>
+<option value="Mobile Money">Mobile Money Fraud</option>
+<option value="Fake Job">Fake Job Offer</option>
+<option value="Romance">Romance Scam</option>
+<option value="Shopping">Online Shopping Fraud</option>
+<option value="Investment">Investment Scam</option>
+<option value="Phishing">Phishing</option>
+<option value="Other">Other</option>
+</select>
+<label data-t="description">Description</label>
+<textarea id="reportDescription" required></textarea>
+<label data-t="contact">Fraudster Contact (Optional)</label>
+<input id="reportContact">
+<button class="action" type="submit" data-t="submit">Prepare Report</button>
+</form>
+<div id="reportResult" class="result"></div>
+<p class="small" data-t="reportNote">This demonstration does not transmit reports to an authority. Do not enter PINs, passwords or OTP codes.</p>
+</div>
+</section>
 
-    // Fake job scams
-    "registration fee",
-    "job application fee",
-    "pay to get a job",
-    "guaranteed employment",
-    "job offer",
-    "recruitment fee",
-    "processing fee",
+<!-- MOMO -->
+<section id="momo" class="panel">
+<div class="card">
+<h2>📱 Mobile Money Protection</h2>
+<h3 data-t="momoTitle">Protect Your MoMo Account</h3>
+<ul>
+<li data-t="m1">Never share your Mobile Money PIN.</li>
+<li data-t="m2">Never share your OTP verification code.</li>
+<li data-t="m3">Check your actual balance before trusting payment messages.</li>
+<li data-t="m4">Do not approve unknown transactions.</li>
+<li data-t="m5">Never click suspicious payment links.</li>
+<li data-t="m6">Contact your network provider through official channels.</li>
+</ul>
+<div class="danger result" style="display:block" data-t="momoWarning">IMPORTANT: Your PIN and OTP belong only to you. Never share them.</div>
+</div>
+</section>
 
-    // Investment scams
-    "double your money",
-    "guaranteed profit",
-    "investment guaranteed",
-    "quick profit",
-    "earn money fast",
+<!-- TIPS -->
+<section id="tips" class="panel">
+<div class="card">
+<h2>🛡️ Digital Safety Tips</h2>
+<div class="item"><h3>1. Strong Passwords</h3><p>Use strong and unique passwords for your accounts.</p></div>
+<div class="item"><h3>2. Two-Factor Authentication</h3><p>Activate additional security on important accounts.</p></div>
+<div class="item"><h3>3. Verify Websites</h3><p>Check website addresses before entering personal information.</p></div>
+<div class="item"><h3>4. Avoid Unknown Links</h3><p>Do not click suspicious links from unknown senders.</p></div>
+<div class="item"><h3>5. Protect Personal Information</h3><p>Never share your PIN, password or OTP.</p></div>
+<div class="item"><h3>6. Verify Job Offers</h3><p>Research companies before paying recruitment fees.</p></div>
+<div class="item"><h3>7. Update Your Phone</h3><p>Install security updates and use trusted applications.</p></div>
+</div>
+</section>
 
-    // Phishing and account scams
-    "click this link",
-    "verify your account",
-    "account blocked",
-    "update your password",
-    "confirm your password",
-    "your account will be closed",
+<!-- QUIZ -->
+<section id="quiz" class="panel">
+<div class="card">
+<h2>🎓 Security Quiz</h2>
+<p id="question"></p>
+<div id="options"></div>
+<div id="feedback" class="result"></div>
+<p id="score">Score: 0</p>
+<button class="action" onclick="nextQuestion()" id="nextButton">Next Question</button>
+<button class="action secondary" onclick="restartQuiz()">Restart Quiz</button>
+</div>
+</section>
 
-    // French suspicious expressions
-    "envoyez de l'argent",
-    "transferez votre argent",
-    "partagez votre code pin",
-    "code de verification",
-    "vous avez gagne",
-    "reclamez votre prix",
-    "argent gratuit",
-    "frais d'inscription",
-    "frais de recrutement",
-    "emploi garanti",
-    "benefice garanti",
-    "doublez votre argent",
-    "cliquez sur ce lien",
-    "verifiez votre compte",
-    "compte bloque",
-    "mot de passe"
-  ];
+<!-- ALERTS -->
+<section id="alerts" class="panel">
+<div class="card">
+<h2>🚨 Scam Awareness Alerts</h2>
+<div class="item"><h3>⚠️ Fake MoMo Reversal</h3><p>Verify your transaction before returning money.</p></div>
+<div class="item"><h3>⚠️ Fake Recruitment</h3><p>Be careful with job offers demanding advance payments.</p></div>
+<div class="item"><h3>⚠️ Investment Fraud</h3><p>Be suspicious of guaranteed profits and pressure to invest.</p></div>
+<div class="item"><h3>⚠️ Suspicious Links</h3><p>Never enter personal details on unknown websites.</p></div>
+<p class="small">These are educational warnings, not verified live incident reports.</p>
+</div>
+</section>
 
-  // Detect suspicious expressions
-  const detectedWords = suspiciousWords.filter(word =>
-    cleanMessage.includes(
-      word.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    )
-  );
+<!-- CONTACTS -->
+<section id="contacts" class="panel">
+<div class="card">
+<h2>📞 Emergency and Reporting Contacts</h2>
+<div class="item"><h3>Ghana Emergency Services</h3><p><strong>112</strong></p></div>
+<div class="item"><h3>Cyber Security Authority Ghana</h3><p>Incident reporting short code: <strong>292</strong></p><a href="https://www.csa.gov.gh/" target="_blank" rel="noopener">Official Website</a></div>
+<div class="item"><h3>Ghana Police</h3><p>For emergencies: <strong>112</strong></p></div>
+<div class="item"><h3>Bank or Mobile Network Provider</h3><p>Contact your provider using the official number in its application or website if you suspect financial fraud.</p></div>
+</div>
+</section>
 
-  // Remove duplicates
-  const uniqueWords = [...new Set(detectedWords)];
+</main>
 
-  // Calculate warning level
-  const riskScore = uniqueWords.length;
+<footer>
+<h3>🛡️ SafeLearn Ghana</h3>
+<p>LEARN • DETECT • REPORT • PROTECT</p>
+<p>Independent Digital Safety Education Project</p>
+<p>© 2026 SafeLearn Ghana</p>
+<p class="small" style="color:white">An independent project. Not an official government agency.</p>
+</footer>
 
-  let title = "";
-  let explanation = "";
+<script>
 
-  if(riskScore >= 3){
+/* PAGE NAVIGATION */
 
-    result.style.background = "#ffe5e5";
-    result.style.color = "#9b1717";
-
-    title = currentLanguage === "fr"
-      ? "🚨 RISQUE ÉLEVÉ : Plusieurs signes suspects détectés"
-      : "🚨 HIGH RISK: Multiple suspicious signs detected";
-
-    explanation = currentLanguage === "fr"
-      ? "Ce message contient plusieurs expressions associées aux arnaques. Ne transférez pas d'argent et ne partagez aucune information personnelle."
-      : "This message contains several expressions associated with scams. Do not transfer money or share personal information.";
-
-  }else if(riskScore > 0){
-
-    result.style.background = "#fff1d8";
-    result.style.color = "#805000";
-
-    title = currentLanguage === "fr"
-      ? "⚠️ ATTENTION : Des signes suspects ont été détectés"
-      : "⚠️ WARNING: Suspicious signs detected";
-
-    explanation = currentLanguage === "fr"
-      ? "Ce message mérite une vérification supplémentaire. Ne prenez aucune décision financière avant de vérifier l'expéditeur."
-      : "This message requires further checking. Do not make financial decisions before verifying the sender.";
-
-  }else{
-
-    result.style.background = "#e8f5eb";
-    result.style.color = "#155b31";
-
-    title = currentLanguage === "fr"
-      ? "🔎 Aucun mot suspect connu détecté"
-      : "🔎 No known suspicious keywords detected";
-
-    explanation = currentLanguage === "fr"
-      ? "Aucun des mots suspects enregistrés dans notre outil n'a été trouvé. Cela ne signifie pas que le message est sûr. Restez vigilant."
-      : "None of the suspicious keywords in our tool were found. This does not mean the message is safe. Stay alert.";
-  }
-
-  // Display results
-  result.replaceChildren();
-
-  const heading = document.createElement("h3");
-  heading.textContent = title;
-
-  const description = document.createElement("p");
-  description.textContent = explanation;
-
-  result.appendChild(heading);
-  result.appendChild(description);
-
-  // Show detected words
-  if(uniqueWords.length > 0){
-
-    const detectedTitle = document.createElement("strong");
-
-    detectedTitle.textContent = currentLanguage === "fr"
-      ? "Expressions suspectes trouvées :"
-      : "Suspicious expressions found:";
-
-    const detectedList = document.createElement("ul");
-
-    uniqueWords.forEach(word => {
-      const item = document.createElement("li");
-      item.textContent = word;
-      detectedList.appendChild(item);
-    });
-
-    result.appendChild(detectedTitle);
-    result.appendChild(detectedList);
-  }
-
-  // Final safety advice
-  const advice = document.createElement("p");
-
-  advice.textContent = currentLanguage === "fr"
-    ? "🛡️ CONSEIL SAFELEARN : Ne partagez jamais votre code PIN, votre OTP ou votre mot de passe. Vérifiez toujours les informations auprès des services officiels."
-    : "🛡️ SAFELEARN ADVICE: Never share your PIN, OTP or password. Always verify information through official services.";
-
-  result.appendChild(advice);
-
-  // Analysis disclaimer
-  const disclaimer = document.createElement("small");
-
-  disclaimer.textContent = currentLanguage === "fr"
-    ? "Note : cet outil utilise une détection par mots-clés. Il ne constitue pas une preuve qu'un message est frauduleux ou authentique."
-    : "Note: This tool uses keyword detection. It does not prove that a message is fraudulent or genuine.";
-
-  result.appendChild(disclaimer);
-
+function showPage(id,button){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+ const page=document.getElementById(id);
+ if(!page)return;
+ page.classList.add('active');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ if(button)button.classList.add('active');
+ else{
+  const btn=[...document.querySelectorAll('nav button')].find(b=>b.getAttribute('onclick').includes("'"+id+"'"));
+  if(btn)btn.classList.add('active');
+ }
+ window.scrollTo({top:0,behavior:'smooth'});
 }
+
+/* SCAM ANALYSIS ENGINE */
+
+function checkScam(){
+ const message=document.getElementById('scamText').value.trim();
+ const result=document.getElementById('checkResult');
+ result.style.display='block';
+
+ if(!message){
+  result.className='result warning';
+  result.textContent='Please paste a message first.';
+  return;
+ }
+
+ const text=message.toLowerCase();
+
+ const rules=[
+  {words:['send money','transfer money','momo pin','mobile money','refund your money','reverse transaction','payment required'],name:'Money or Mobile Money request'},
+  {words:['otp','verification code','password','pin code','security code'],name:'Request for confidential information'},
+  {words:['you won','winner','prize','claim your reward','congratulations'],name:'Prize or reward offer'},
+  {words:['guaranteed profit','double your money','quick profit','risk free investment'],name:'Unrealistic investment promise'},
+  {words:['urgent','act now','immediately','limited time','last chance'],name:'Urgency or pressure'},
+  {words:['registration fee','processing fee','job application fee','pay to get job'],name:'Advance payment for employment'},
+  {words:['click here','verify your account','account suspended','confirm your account'],name:'Suspicious link or account verification'},
+  {words:['gift card','crypto payment','bitcoin payment'],name:'Unusual payment request'}
+ ];
+
+ let found=[];
+ rules.forEach(rule=>{
+  if(rule.words.some(word=>text.includes(word))){
+   found.push(rule.name);
+  }
+ });
+
+ if(found.length>=3){
+  result.className='result danger';
+  result.innerHTML='<strong>HIGH RISK WARNING</strong><p>Several suspicious signs were detected:</p><ul>'+found.map(x=>'<li>'+x+'</li>').join('')+'</ul><p>Do not send money or share confidential information. Verify independently.</p>';
+ }else if(found.length>0){
+  result.className='result warning';
+  result.innerHTML='<strong>CAUTION – SUSPICIOUS SIGNS</strong><p>Possible warning signs:</p><ul>'+found.map(x=>'<li>'+x+'</li>').join('')+'</ul><p>Investigate the message before taking action.</p>';
+ }else{
+  result.className='result safe';
+  result.innerHTML='<strong>NO COMMON WARNING KEYWORDS DETECTED</strong><p>This does not prove that the message is safe. Verify the sender and any request independently.</p>';
+ }
+}
+
+function clearCheck(){
+ document.getElementById('scamText').value='';
+ document.getElementById('checkResult').style.display='none';
+}
+
+/* REPORT FORM */
+
+document.getElementById('reportForm').addEventListener('submit',function(e){
+ e.preventDefault();
+
+ const name=document.getElementById('reportName').value.trim();
+ const type=document.getElementById('reportType').value;
+ const description=document.getElementById('reportDescription').value.trim();
+ const contact=document.getElementById('reportContact').value.trim();
+
+ const report={
+  reference:'SLG-'+Date.now(),
+  name:name,
+  type:type,
+  description:description,
+  contact:contact,
+  date:new Date().toLocaleString()
+ };
+
+ const output=document.getElementById('reportResult');
+ output.style.display='block';
+ output.className='result safe';
+ output.innerHTML='<h3>Report Prepared Successfully</h3><p><strong>Reference:</strong> '+report.reference+'</p><p><strong>Type:</strong> '+escapeHTML(type)+'</p><p><strong>Description:</strong> '+escapeHTML(description)+'</p><p>Your report is prepared locally. It has NOT been sent to an authority.</p>';
+
+ const file=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(file);
+ const link=document.createElement('a');
+ link.href=url;
+ link.download=report.reference+'.json';
+ link.textContent='Download Report';
+ link.className='action';
+ output.appendChild(document.createElement('br'));
+ output.appendChild(link);
+ link.addEventListener('click',()=>setTimeout(()=>URL.revokeObjectURL(url),1000));
+});
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ }[c]));
+}
+
+/* SECURITY QUIZ */
+
+const questions=[
+ {q:'Someone asks for your Mobile Money PIN. What should you do?',a:['Share it','Refuse to share it','Send it later'],correct:1},
+ {q:'You receive a suspicious prize link. What should you do?',a:['Click immediately','Share it','Avoid the link and verify'],correct:2},
+ {q:'A stranger promises guaranteed investment profits. What should you do?',a:['Send all your money','Investigate carefully','Trust immediately'],correct:1},
+ {q:'A job offer asks you to pay a personal registration fee. What should you do?',a:['Verify the company first','Pay immediately','Send your password'],correct:0},
+ {q:'What should you do with an OTP code?',a:['Share it with friends','Post it online','Keep it private'],correct:2}
+];
+
+let currentQuestion=0;
+let score=0;
+let answered=false;
+
+function loadQuestion(){
+ const q=questions[currentQuestion];
+ document.getElementById('question').textContent=(currentQuestion+1)+'. '+q.q;
+ const options=document.getElementById('options');
+ options.innerHTML='';
+ q.a.forEach((answer,index)=>{
+  const button=document.createElement('button');
+  button.className='quiz-option';
+  button.textContent=answer;
+  button.onclick=()=>answerQuestion(index);
+  options.appendChild(button);
+ });
+ document.getElementById('feedback').style.display='none';
+ document.getElementById('nextButton').disabled=true;
+ answered=false;
+ document.getElementById('score').textContent='Score: '+score+'/'+questions.length;
+}
+
+function answerQuestion(index){
+ if(answered)return;
+ answered=true;
+ const q=questions[currentQuestion];
+ const feedback=document.getElementById('feedback');
+ feedback.style.display='block';
+ if(index===q.correct){
+  score++;
+  feedback.className='result safe';
+  feedback.textContent='Correct! Excellent security awareness.';
+ }else{
+  feedback.className='result warning';
+  feedback.textContent='Incorrect. Correct answer: '+q.a[q.correct];
+ }
+ document.querySelectorAll('.quiz-option').forEach(b=>b.disabled=true);
+ document.getElementById('nextButton').disabled=false;
+ document.getElementById('score').textContent='Score: '+score+'/'+questions.length;
+}
+
+function nextQuestion(){
+ if(!answered)return;
+ if(currentQuestion<questions.length-1){
+  currentQuestion++;
+  loadQuestion();
+ }else{
+  document.getElementById('question').textContent='Quiz completed! Your final score: '+score+'/'+questions.length;
+  document.getElementById('options').innerHTML='';
+  document.getElementById('feedback').style.display='block';
+  document.getElementById('feedback').className='result safe';
+  document.getElementById('feedback').textContent=score===questions.length?'Excellent! You know how to protect yourself.':'Keep learning! Review the Safety Tips and try again.';
+  document.getElementById('nextButton').disabled=true;
+ }
+}
+
+function restartQuiz(){
+ currentQuestion=0;
+ score=0;
+ loadQuestion();
+}
+
+/* LANGUAGE SYSTEM */
+
+const translations={
+ en:{
+ tagline:'Your Digital Safety Starts Here',home:'Home',scams:'Common Scams',check:'Check Scam',report:'Report Scam',momo:'MoMo Safety',tips:'Safety Tips',quiz:'Security Quiz',alerts:'Scam Alerts',contacts:'Contacts',
+ welcome:'Welcome to SafeLearn Ghana',intro:'An independent digital safety education platform helping people identify and avoid online scams.',start:'Check a Message',services:'Our Services',mission:'Our Mission',missionText:'To educate individuals and communities about digital security and online fraud prevention.',
+ scamTitle:'Common Scams in Ghana',s1:'Fake payment messages, false transfers and requests for your PIN.',s2:'Fraudsters promise employment after collecting registration fees.',s3:'People create fake relationships to request money.',s4:'Fake sellers collect payments without delivering products.',s5:'Promises of guaranteed profits and unrealistic returns.',s6:'Messages claiming you have won a prize but must pay first.',s7:'Fake websites and links designed to steal personal information.',
+ checkTitle:'Scam Message Analyzer',checkDesc:'Paste a suspicious message below for a basic security analysis.',message:'Suspicious Message',analyze:'Analyze Message',clear:'Clear',disclaimer:'This tool checks common warning signs. It cannot guarantee that a message is genuine or fraudulent.',
+ reportTitle:'Report a Scam',reportDesc:'Prepare a record of a suspicious incident.',name:'Your Name (Optional)',type:'Type of Scam',description:'Description',contact:'Fraudster Contact (Optional)',submit:'Prepare Report',reportNote:'Reports are not sent to authorities automatically. Never enter PINs or passwords.',
+ momoTitle:'Protect Your MoMo Account',m1:'Never share your Mobile Money PIN.',m2:'Never share your OTP verification code.',m3:'Check your actual balance before trusting payment messages.',m4:'Do not approve unknown transactions.',m5:'Never click suspicious payment links.',m6:'Contact your network provider through official channels.',momoWarning:'IMPORTANT: Your PIN and OTP belong only to you.',
+ language:'Choose Your Language'
+ },
+ fr:{
+ tagline:'Votre sécurité numérique commence ici',home:'Accueil',scams:'Arnaques',check:'Vérifier',report:'Signaler',momo:'Sécurité MoMo',tips:'Conseils',quiz:'Quiz',alerts:'Alertes',contacts:'Contacts',
+ welcome:'Bienvenue sur SafeLearn Ghana',intro:'Une plateforme indépendante pour apprendre à reconnaître et éviter les arnaques en ligne.',start:'Vérifier un message',services:'Nos services',mission:'Notre mission',missionText:'Éduquer les personnes et les communautés sur la sécurité numérique et la prévention des fraudes.',
+ scamTitle:'Arnaques courantes au Ghana',s1:'Faux messages de paiement et demandes de code PIN.',s2:'Les fraudeurs promettent un emploi après avoir reçu des frais.',s3:'De fausses relations sont utilisées pour demander de l’argent.',s4:'De faux vendeurs encaissent les paiements sans livrer.',s5:'Promesses de profits garantis et irréalistes.',s6:'Faux messages de gain demandant un paiement préalable.',s7:'Faux sites et liens destinés à voler des informations.',
+ checkTitle:'Analyseur de messages suspects',checkDesc:'Collez un message suspect pour une analyse de sécurité.',message:'Message suspect',analyze:'Analyser le message',clear:'Effacer',disclaimer:'Cet outil détecte des signes suspects. Il ne peut pas garantir qu’un message est authentique ou frauduleux.',
+ reportTitle:'Signaler une arnaque',reportDesc:'Préparez un dossier sur un incident suspect.',name:'Votre nom (facultatif)',type:'Type d’arnaque',description:'Description',contact:'Contact du fraudeur (facultatif)',submit:'Préparer le signalement',reportNote:'Les signalements ne sont pas transmis automatiquement aux autorités. Ne saisissez jamais votre PIN ou mot de passe.',
+ momoTitle:'Protégez votre compte MoMo',m1:'Ne partagez jamais votre code PIN Mobile Money.',m2:'Ne partagez jamais votre code OTP.',m3:'Vérifiez votre solde réel avant de croire un message de paiement.',m4:'Ne validez pas les transactions inconnues.',m5:'Ne cliquez jamais sur des liens suspects.',m6:'Contactez votre opérateur par ses canaux officiels.',momoWarning:'IMPORTANT : Votre PIN et votre OTP sont strictement personnels.',
+ language:'Choisissez votre langue'
+ },
+ tw:{
+ tagline:'Wo digital ahobammɔ fi ha',home:'Fie',scams:'Nnaadaa',check:'Hwɛ Nneɛma',report:'Bɔ Amanneɛ',momo:'MoMo Ahobammɔ',tips:'Afotuo',quiz:'Nsɔhwɛ',alerts:'Kɔkɔbɔ',contacts:'Nkitahodi',
+ welcome:'Akwaaba wɔ SafeLearn Ghana',intro:'Platform a ɛkyerɛ nnipa sɛnea wɔbɛhunu na wɔakwati internet nnaadaa.',start:'Hwɛ Nkrasɛm',services:'Yɛn Dwumadi',mission:'Yɛn Botae',missionText:'Yɛkyerɛ nnipa sɛnea wɔbɛbɔ wɔn ho ban wɔ internet so.',
+ scamTitle:'Nnaadaa a ɛtaa ba Ghana',s1:'MoMo nkrasɛm atorɔ ne PIN abisa.',s2:'Adwuma atorɔ a wɔbisa sika ansa.',s3:'Abusuabɔ atorɔ a wɔde bisa sika.',s4:'Adetɔnfo atorɔ a wɔnnema nneɛma.',s5:'Mfaso kɛse a wɔhyɛ ho bɔ atorɔ.',s6:'Akyɛde atorɔ a wɔbisa sika ansa.',s7:'Website atorɔ a ɛwia wo nsɛm.',
+ checkTitle:'Nkrasɛm Nhwehwɛmu',checkDesc:'Fa nkrasɛm a wususuw sɛ ɛyɛ nnaadaa bra ha.',message:'Nkrasɛm',analyze:'Hwehwɛ Mu',clear:'Pepa',disclaimer:'Saa adwinnade yi hunu nsɛnkyerɛnne bi. Ɛrentumi nhyɛ bɔ sɛ nkrasɛm no yɛ nokware.',
+ reportTitle:'Bɔ Nnaadaa Amanneɛ',reportDesc:'Kyerɛw nea esii no ho nsɛm.',name:'Wo din (sɛ wopɛ)',type:'Nnaadaa no su',description:'Nsɛmkyerɛmu',contact:'Nnaadaafo nɔma (sɛ wopɛ)',submit:'Siesie Amanneɛbɔ',reportNote:'Amanneɛbɔ yi nkɔma aban anaa polisifo ankasa. Mfa wo PIN anaa password nhyɛ mu.',
+ momoTitle:'Bɔ Wo MoMo Ho Ban',m1:'Mma obiara wo MoMo PIN.',m2:'Mma obiara wo OTP.',m3:'Hwɛ wo sika ankasa ansa na wugye nkrasɛm di.',m4:'Mfa wo nsa nka biribi a wunim.',m5:'Nnhyɛ link a ɛyɛ hu so.',m6:'Frɛ wo network adwumakuw denam wɔn kwan a ɛyɛ nokware so.',momoWarning:'ƐHO HIA: Wo PIN ne OTP yɛ wo kokoamsɛm.',
+ language:'Paw Wo Kasa'
+ }
+};
+
+function changeLanguage(lang){
+ const dict=translations[lang]||translations.en;
+ document.documentElement.lang=lang;
+ document.querySelectorAll('[data-t]').forEach(element=>{
+  const key=element.getAttribute('data-t');
+  if(dict[key])element.textContent=dict[key];
+ });
+ document.getElementById('tagline').textContent=dict.tagline;
+}
+
+loadQuestion();
+
+</script>
+</body>
+</html>
