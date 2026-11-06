@@ -8,21 +8,20 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f2f8f3;color:#173b28}
-header{background:#08783d;color:white;text-align:center;padding:28px 15px}
-header h1{margin:0;font-size:28px}
-header p{margin:9px 0 0}
+header{background:#08783d;color:white;text-align:center;padding:25px 15px}
+header h1{margin:0;font-size:27px}
 main{max-width:650px;margin:auto;padding:16px}
-.welcome{background:#d9f3df;padding:20px;border-radius:14px;margin-bottom:18px}
+.welcome{background:#d9f3df;padding:18px;border-radius:14px}
 h2{color:#08783d}
+.language{margin:15px 0}
+select,textarea,input{width:100%;padding:12px;margin:8px 0 14px;border:1px solid #bbb;border-radius:8px;font-size:16px}
 .menu{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-button{border:0;border-radius:12px;padding:17px 10px;background:#08783d;color:white;font-size:15px;font-weight:bold;cursor:pointer}
-button:active{opacity:.8}
+button{border:0;border-radius:12px;padding:15px 8px;background:#08783d;color:white;font-size:14px;font-weight:bold;cursor:pointer}
 button.secondary{background:#e2f2e6;color:#07552d}
 .panel{display:none;background:white;padding:18px;border-radius:14px;margin-top:18px;box-shadow:0 2px 9px #0001}
 .panel.active{display:block}
 li{margin-bottom:12px;line-height:1.5}
-input,textarea,select{width:100%;padding:12px;margin:8px 0 14px;border:1px solid #bbb;border-radius:8px;font-size:16px}
-.submit{width:100%;margin-top:8px}
+.submit{width:100%}
 .note{font-size:13px;color:#555;line-height:1.5}
 footer{text-align:center;padding:22px;color:#567}
 </style>
@@ -35,29 +34,40 @@ footer{text-align:center;padding:22px;color:#567}
 </header>
 
 <main>
+
+<div class="language">
+<label id="languageLabel">Choose your language</label>
+<select id="language" onchange="changeLanguage()">
+<option value="en">English</option>
+<option value="fr">Français</option>
+<option value="tw">Twi</option>
+</select>
+</div>
+
 <div class="welcome">
-<h2>Welcome to SafeLearn Ghana!</h2>
-<p>Learn how to identify scams, protect your money and stay safe online.</p>
+<h2 data-i18n="welcome">Welcome to SafeLearn Ghana!</h2>
+<p data-i18n="intro">Learn how to identify scams, protect your money and stay safe online.</p>
 </div>
 
 <div class="menu">
-<button onclick="showPage('scams')">Common Scams</button>
-<button onclick="showPage('tips')">Safety Tips</button>
-<button onclick="showPage('report')">Report Scam</button>
-<button onclick="showPage('momo')">MoMo Protection</button>
-<button onclick="showPage('check')">Check a Message</button>
-<button onclick="showPage('quiz')">Security Quiz</button>
+<button onclick="showPage('scams')" data-i18n="scams">Common Scams</button>
+<button onclick="showPage('tips')" data-i18n="tips">Safety Tips</button>
+<button onclick="showPage('report')" data-i18n="report">Report Scam</button>
+<button onclick="showPage('momo')" data-i18n="momo">MoMo Protection</button>
+<button onclick="showPage('check')" data-i18n="check">Check a Message</button>
+<button onclick="showPage('quiz')" data-i18n="quiz">Security Quiz</button>
 </div>
 
 <section id="scams" class="panel">
-<h2>Common Scams in Ghana</h2>
+<h2 data-i18n="scamTitle">Common Scams in Ghana</h2>
 <ul>
 <li><b>Mobile Money scams:</b> Fake payment messages and calls pretending to be MoMo agents.</li>
 <li><b>Fake job offers:</b> People asking for registration fees before giving you a job.</li>
 <li><b>Online shopping scams:</b> Sellers collecting money without delivering goods.</li>
 <li><b>Romance scams:</b> Strangers asking for money after building online relationships.</li>
 <li><b>Fake investment scams:</b> Promises of guaranteed high profits.</li>
-</ul><h3>How to Protect Yourself</h3>
+</ul>
+<h3 data-i18n="protect">How to Protect Yourself</h3>
 <ul>
 <li>Never share your MoMo PIN with anyone.</li>
 <li>Always verify payments before sending goods.</li>
@@ -68,7 +78,7 @@ footer{text-align:center;padding:22px;color:#567}
 </section>
 
 <section id="tips" class="panel">
-<h2>Safety Tips</h2>
+<h2 data-i18n="tipsTitle">Safety Tips</h2>
 <ul>
 <li>Never share your MoMo PIN or password.</li>
 <li>Never share your OTP verification code.</li>
@@ -80,53 +90,53 @@ footer{text-align:center;padding:22px;color:#567}
 </section>
 
 <section id="report" class="panel">
-<h2>Report a Scam</h2>
-<p>Describe a suspicious incident below.</p>
+<h2 data-i18n="reportTitle">Report a Scam</h2>
+<p data-i18n="reportIntro">Describe a suspicious incident below.</p>
 <form onsubmit="submitReport(event)">
-<label>Your name (optional)</label>
+<label data-i18n="name">Your name (optional)</label>
 <input id="reportName" placeholder="Your name">
-<label>Type of scam</label>
+<label data-i18n="type">Type of scam</label>
 <select id="reportType" required>
-<option value="">Choose scam type</option>
+<option value="" data-i18n="choose">Choose scam type</option>
 <option>Mobile Money scam</option>
 <option>Fake job offer</option>
 <option>Online shopping scam</option>
 <option>Investment scam</option>
 <option>Other</option>
 </select>
-<label>What happened?</label>
-<textarea id="reportDetails" rows="4" placeholder="Describe what happened..." required></textarea>
-<button class="submit" type="submit">Submit Report</button>
+<label data-i18n="details">What happened?</label>
+<textarea id="reportDetails" rows="4" required></textarea>
+<button class="submit" type="submit" data-i18n="submit">Submit Report</button>
 </form>
-<p class="note">Demo only: this form does not send reports to the police or any authority. Keep evidence and contact the appropriate official service.</p>
+<p class="note" data-i18n="demo">Demo only: this form does not send reports to the police or any authority.</p>
 <div id="reportResult"></div>
 </section>
 
 <section id="momo" class="panel">
-<h2>MoMo Scam Protection</h2>
+<h2 data-i18n="momoTitle">MoMo Scam Protection</h2>
 <ul>
 <li>Never give anyone your MoMo PIN.</li>
 <li>Check your actual account balance before confirming a payment.</li>
 <li>Do not trust screenshots as proof of payment.</li>
 <li>Never follow instructions from suspicious callers.</li>
-<li>Contact your mobile money provider through its official channels if you suspect fraud.</li>
+<li>Contact your mobile money provider through official channels.</li>
 </ul>
 </section>
 
 <section id="check" class="panel">
-<h2>Check a Suspicious Message</h2>
-<p>Paste a suspicious message to look for warning signs.</p>
+<h2 data-i18n="checkTitle">Check a Suspicious Message</h2>
+<p data-i18n="checkIntro">Paste a suspicious message to look for warning signs.</p>
 <textarea id="message" rows="4" placeholder="Paste your message here..."></textarea>
-<button class="submit" onclick="checkMessage()">Check Message</button>
+<button class="submit" onclick="checkMessage()" data-i18n="checkButton">Check Message</button>
 <div id="messageResult"></div>
-<p class="note">This tool checks common warning words. It cannot prove whether a message is genuine or fraudulent.</p>
+<p class="note" data-i18n="checkNote">This tool cannot prove whether a message is genuine or fraudulent.</p>
 </section>
 
 <section id="quiz" class="panel">
-<h2>Security Quiz</h2>
-<p>Someone calls and asks for your MoMo PIN. What should you do?</p>
-<button class="secondary" onclick="answer(false)">Give them my PIN</button>
-<button class="secondary" onclick="answer(true)">Never share my PIN</button>
+<h2 data-i18n="quizTitle">Security Quiz</h2>
+<p data-i18n="question">Someone calls and asks for your MoMo PIN. What should you do?</p>
+<button class="secondary" onclick="answer(false)" data-i18n="wrong">Give them my PIN</button>
+<button class="secondary" onclick="answer(true)" data-i18n="right">Never share my PIN</button>
 <div id="quizResult"></div>
 </section>
 
@@ -137,41 +147,147 @@ footer{text-align:center;padding:22px;color:#567}
 </main>
 
 <script>
+const translations = {
+en:{
+welcome:"Welcome to SafeLearn Ghana!",
+intro:"Learn how to identify scams, protect your money and stay safe online.",
+scams:"Common Scams",tips:"Safety Tips",report:"Report Scam",
+momo:"MoMo Protection",check:"Check a Message",quiz:"Security Quiz",
+scamTitle:"Common Scams in Ghana",protect:"How to Protect Yourself",
+tipsTitle:"Safety Tips",reportTitle:"Report a Scam",
+reportIntro:"Describe a suspicious incident below.",
+name:"Your name (optional)",type:"Type of scam",choose:"Choose scam type",
+details:"What happened?",submit:"Submit Report",
+demo:"Demo only: this form does not send reports to the police or any authority.",
+momoTitle:"MoMo Scam Protection",checkTitle:"Check a Suspicious Message",
+checkIntro:"Paste a suspicious message to look for warning signs.",
+checkButton:"Check Message",
+checkNote:"This tool cannot prove whether a message is genuine or fraudulent.",
+quizTitle:"Security Quiz",
+question:"Someone calls and asks for your MoMo PIN. What should you do?",
+wrong:"Give them my PIN",right:"Never share my PIN",
+success:"Correct! Never share your MoMo PIN.",
+fail:"Incorrect. Never share your PIN.",
+empty:"Please enter a message first.",
+warning:"Warning signs found:",
+safe:"No common warning words found. This does not guarantee safety.",
+recorded:"Your report has been recorded on this page."
+},
+fr:{
+welcome:"Bienvenue sur SafeLearn Ghana !",
+intro:"Apprenez à reconnaître les arnaques et à protéger votre argent en ligne.",
+scams:"Arnaques courantes",tips:"Conseils de sécurité",
+report:"Signaler une arnaque",momo:"Protection MoMo",
+check:"Vérifier un message",quiz:"Quiz de sécurité",
+scamTitle:"Arnaques courantes au Ghana",
+protect:"Comment vous protéger",
+tipsTitle:"Conseils de sécurité",
+reportTitle:"Signaler une arnaque",
+reportIntro:"Décrivez un incident suspect ci-dessous.",
+name:"Votre nom (facultatif)",type:"Type d'arnaque",
+choose:"Choisir le type d'arnaque",
+details:"Que s'est-il passé ?",submit:"Envoyer le signalement",
+demo:"Démo uniquement : ce formulaire n'envoie aucun rapport à la police ou aux autorités.",
+momoTitle:"Protection contre les arnaques MoMo",
+checkTitle:"Vérifier un message suspect",
+checkIntro:"Collez un message suspect pour rechercher des signes d'alerte.",
+checkButton:"Vérifier le message",
+checkNote:"Cet outil ne peut pas confirmer si un message est authentique ou frauduleux.",
+quizTitle:"Quiz de sécurité",
+question:"Quelqu'un vous appelle et demande votre code PIN MoMo. Que faites-vous ?",
+wrong:"Je lui donne mon code PIN",
+right:"Je ne partage jamais mon code PIN",
+success:"Correct ! Ne partagez jamais votre code PIN MoMo.",
+fail:"Incorrect. Ne partagez jamais votre code PIN.",
+empty:"Veuillez d'abord saisir un message.",
+warning:"Signes d'alerte trouvés :",
+safe:"Aucun mot d'alerte courant trouvé. Cela ne garantit pas la sécurité.",
+recorded:"Votre signalement a été enregistré sur cette page."
+},
+tw:{
+welcome:"Akwaaba wɔ SafeLearn Ghana!",
+intro:"Sua sɛnea wubehu nnaadaa na wobɛbɔ wo sika ne wo ho ban wɔ intanɛt so.",
+scams:"Nnaadaa Ahorow",tips:"Ahobammɔ Afotu",
+report:"Bɔ Nnaadaa Ho Amanneɛ",momo:"MoMo Ahobammɔ",
+check:"Hwɛ Nkrasɛm",quiz:"Ahobammɔ Nsɛmmisa",
+scamTitle:"Nnaadaa Ahorow a Ɛwɔ Ghana",
+protect:"Sɛnea Wobɛbɔ Wo Ho Ban",
+tipsTitle:"Ahobammɔ Afotu",
+reportTitle:"Bɔ Nnaadaa Ho Amanneɛ",
+reportIntro:"Kyerɛkyerɛ nea esii a ɛyɛ nwonwa no mu.",
+name:"Wo din (ɛnyɛ ɔhyɛ)",
+type:"Nnaadaa no su",choose:"Paw nnaadaa no su",
+details:"Ɛdeɛn na esii?",submit:"Fa Amanneɛ Kɔ",
+demo:"Sɔhwɛ nko ara: saa kratasin yi mfa amanneɛ nkɔ polisifo nkyɛn.",
+momoTitle:"MoMo Nnaadaa Ho Ahobammɔ",
+checkTitle:"Hwɛ Nkrasɛm a Ɛyɛ Nwonwa",
+checkIntro:"Fa nkrasɛm a wunyae no hyɛ ha.",
+checkButton:"Hwɛ Nkrasɛm",
+checkNote:"Saa nhyehyɛe yi ntumi nkyerɛ sɛ nkrasɛm no yɛ nokware anaa ɛyɛ nnaadaa.",
+quizTitle:"Ahobammɔ Nsɛmmisa",
+question:"Obi frɛ wo bisa wo MoMo PIN. Dɛn na wobɛyɛ?",
+wrong:"Mɛma no me PIN",
+right:"Meremma obiara me PIN",
+success:"Woayɛ no yiye! Mma obiara wo MoMo PIN.",
+fail:"Ɛnyɛ yiye. Mma obiara wo PIN.",
+empty:"Fa nkrasɛm bi hyɛ mu kan.",
+warning:"Yɛahu nsɛnkyerɛnne a ɛkyerɛ nnaadaa:",
+safe:"Yɛanhu nsɛmfua a ɛkyerɛ nnaadaa. Nanso ɛnkyerɛ sɛ nkrasɛm no yɛ dwoodwoo.",
+recorded:"Wɔakyerɛw wo amanneɛ wɔ ha."
+}
+};
+
+function changeLanguage(){
+const lang=document.getElementById("language").value;
+const t=translations[lang];
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.getAttribute("data-i18n");
+if(t[key]) el.textContent=t[key];
+});
+document.getElementById("languageLabel").textContent=
+lang==="fr"?"Choisissez votre langue":
+lang==="tw"?"Paw wo kasa":"Choose your language";
+document.documentElement.lang=lang;
+}
+
 function showPage(id){
-document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-document.getElementById(id).scrollIntoView({behavior:'smooth'});
+document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+function currentText(key){
+return translations[document.getElementById("language").value][key];
 }
 
 function submitReport(event){
 event.preventDefault();
-document.getElementById('reportResult').innerHTML=
-'<p style="color:green"><b>Your report has been recorded on this page.</b></p><p class="note">It has not been sent or saved to a server.</p>';
+document.getElementById("reportResult").innerHTML=
+"<p style='color:green'><b>"+currentText("recorded")+"</b></p>";
 event.target.reset();
 }
 
 function checkMessage(){
-let msg=document.getElementById('message').value.toLowerCase();
-let words=['urgent','password','pin','otp','send money','winner','prize','free money','click here','verify account'];
+let msg=document.getElementById("message").value.toLowerCase();
+let words=["urgent","password","pin","otp","send money","winner","prize","free money","click here","verify account"];
 let found=words.filter(w=>msg.includes(w));
-let result=document.getElementById('messageResult');
+let result=document.getElementById("messageResult");
 if(!msg.trim()){
-result.innerHTML='<p>Please enter a message first.</p>';
+result.textContent=currentText("empty");
 return;
 }
 if(found.length){
-result.innerHTML='<p style="color:#b45309"><b>Warning signs found:</b> '+found.join(', ')+'. Be careful and verify the sender.</p>';
+result.textContent=currentText("warning")+" "+found.join(", ");
 }else{
-result.innerHTML='<p>No common warning words found. This does not guarantee the message is safe.</p>';
+result.textContent=currentText("safe");
 }
 }
 
 function answer(correct){
-document.getElementById('quizResult').innerHTML=correct?
-'<p style="color:green"><b>Correct! Never share your MoMo PIN.</b></p>':
-'<p style="color:red"><b>Incorrect. Never share your PIN with anyone.</b></p>';
+document.getElementById("quizResult").innerHTML=correct?
+"<p style='color:green'><b>"+currentText("success")+"</b></p>":
+"<p style='color:red'><b>"+currentText("fail")+"</b></p>";
 }
 </script>
-
 </body>
 </html>
