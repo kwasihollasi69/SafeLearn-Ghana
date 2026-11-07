@@ -251,24 +251,24 @@ function showPage(id,button){
  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* SCAM ANALYSIS ENGINE */
+
+/* SCAM ANALYSIS ENGINE - CLEAN VERSION */
 
 function checkScam() {
     const input = document.getElementById("scamText");
-    const result =
-        document.getElementById("checkResult") ||
-        document.getElementById("checkerResult");
+    const result = document.getElementById("checkResult");
 
     if (!input || !result) {
-        alert("Scam Analyzer: input or result area not found.");
+        alert("Scam Analyzer not found.");
         return;
     }
-result.style.display = "block";
 
     const message = input.value.trim();
+    result.style.display = "block";
 
     if (!message) {
-        result.innerHTML = "Please enter a suspicious message.";
+        result.className = "result warning";
+        result.textContent = "Please enter a suspicious message.";
         return;
     }
 
@@ -276,73 +276,48 @@ result.style.display = "block";
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 
+    const french = document.documentElement.lang
+        .toLowerCase().startsWith("fr");
+
     let risk = 0;
-    let warnings = [];
+    const warnings = [];
 
     const rules = [
         {
             name: "Mobile Money / MoMo",
-            words: ["momo", "mobile money", "mtn", "vodafone cash",
-                "telecel cash", "deposit", "depot", "transfer",
-                "transfert", "sent money", "money sent",
-                "wrong transfer", "mistake transfer"]
+            words: ["momo", "mobile money", "mtn", "telecel cash", "vodafone cash"]
         },
         {
             name: "Fake payment confirmation",
-            words: ["no notification", "no message received",
-                "not received", "did not receive", "pas recu",
-                "aucun message", "aucune notification",
-                "money not received", "fake receipt"]
+            words: ["fake receipt", "no notification", "not received", "money not received", "pas recu", "aucun message"]
         },
         {
-            name: "PIN and OTP theft",
-            words: ["pin", "otp", "verification code",
-                "secret code", "password", "mot de passe",
-                "code secret", "code de verification"]
+            name: "PIN and OTP protection",
+            words: ["pin", "otp", "password", "verification code", "secret code", "mot de passe", "code secret"]
         },
         {
             name: "Suspicious refund requests",
-            words: ["refund", "send back", "return the money",
-                "remboursement", "renvoyer l'argent",
-                "reverse transaction", "reverse the money"]
+            words: ["refund", "send back", "return the money", "reverse transaction", "remboursement", "renvoyer l'argent"]
         },
         {
             name: "Urgency and pressure",
-            words: ["immediately", "urgent", "right now",
-                "quickly", "vite", "maintenant",
-                "immediatement", "without delay"]
+            words: ["urgent", "immediately", "right now", "without delay", "vite", "immediatement"]
         },
         {
             name: "Fake prizes",
-            words: ["you won", "winner", "free prize",
-                "claim your prize", "congratulations",
-                "vous avez gagne", "prix gratuit",
-                "reclamer votre prix"]
+            words: ["you won", "winner", "free prize", "claim your prize", "claim reward", "vous avez gagne", "reclamer votre prix"]
         },
         {
             name: "Fake employment",
-            words: ["registration fee", "job offer",
-                "recruitment fee", "frais d'inscription",
-                "frais de recrutement", "emploi garanti"]
+            words: ["registration fee", "job offer", "recruitment fee", "frais d'inscription", "frais de recrutement", "emploi garanti"]
         },
         {
             name: "Investment fraud",
-            words: ["guaranteed profit", "no risk",
-                "double your money", "guaranteed returns",
-                "profit garanti", "sans risque",
-                "doubler votre argent"]
+            words: ["guaranteed profit", "no risk", "double your money", "guaranteed returns", "profit garanti", "sans risque"]
         },
         {
             name: "Suspicious links",
-            words: ["click this link", "verify your account",
-                "unlock your account", "cliquez ici",
-                "confirmer votre compte", "debloquer votre compte"]
-        },
-        {
-            name: "Suspicious account requests",
-            words: ["check your account", "verify your momo",
-                "voir ton compte", "verifier ton compte",
-                "check momo", "open your account"]
+            words: ["click this link", "verify your account", "unlock your account", "cliquez ici", "confirmer votre compte"]
         }
     ];
 
@@ -353,108 +328,105 @@ result.style.display = "block";
         }
     });
 
-// CRITICAL PIN AND OTP PROTECTION
+    const asksForSecretCode =
+        /(send|share|give|provide|tell|submit|enter|type|text|envoyer|partager|donner|communiquer|saisir|transmettre).{0,60}(pin|otp|password|passcode|verification code|secret code|code secret|mot de passe)/.test(text) ||
+        /(pin|otp|password|passcode|verification code|secret code|code secret|mot de passe).{0,60}(send|share|give|provide|tell|submit|enter|type|text|envoyer|partager|donner|communiquer|saisir|transmettre)/.test(text);
 
-const asksForSecretCode =
-    /(send|share|give|provide|tell|submit|enter|type|text|envoyer|partager|donner|communiquer|saisir|transmettre).{0,45}(pin|otp|password|passcode|verification code|secret code|code secret|mot de passe)/.test(text) ||
-    /(pin|otp|password|passcode|verification code|secret code|code secret|mot de passe).{0,45}(send|share|give|provide|tell|submit|enter|type|text|envoyer|partager|donner|communiquer|saisir|transmettre)/.test(text);
+    if (asksForSecretCode) {
+        risk += 3;
+        warnings.push("Direct request for PIN, OTP or password");
+    }
 
-if (asksForSecretCode) {
-    risk += 3;
-    warnings.push("Direct request for a PIN, OTP or password");
-}
+    const prizeClaim =
+        /(you have won|you won|claim your prize|claim reward|free money|congratulations winner|vous avez gagne|reclamez votre prix|recompense gratuite)/.test(text);
 
-const prizeClaim =
-    /you won|winner|free prize|claim your prize|congratulations|vous avez gagne|prix gratuit|reclamer votre prix/.test(text);
+    const asksForPayment =
+        /(pay|payment|deposit|send money|registration fee|frais|payer|depot|envoyer de l'argent)/.test(text);
 
-if (prizeClaim && asksForSecretCode) {
-    risk += 2;
-    warnings.push("Prize claim used to obtain confidential information");
-}
+    if (prizeClaim && asksForPayment) {
+        risk += 3;
+        warnings.push("Prize scam requesting payment");
+    }
 
-    // Special combination: suspicious MoMo deposit
     const momoDeposit =
-        /momo|mobile money|mtn|telecel cash|vodafone cash/.test(text);
+        /(momo|mobile money|mtn|telecel cash|vodafone cash)/.test(text);
 
     const missingConfirmation =
-        /pas recu|aucun message|no notification|not received|no message/.test(text);
+        /(pas recu|aucun message|no notification|not received|no message)/.test(text);
 
     const accountCheck =
-        /verifier ton compte|voir ton compte|check your account|verify your momo/.test(text);
+        /(verifier ton compte|voir ton compte|check your account|verify your momo)/.test(text);
 
     if (momoDeposit && missingConfirmation && accountCheck) {
         risk += 2;
         warnings.push("Possible fake MoMo deposit");
     }
 
-    const detectedLanguage = document.documentElement.lang || "en";
-const french = detectedLanguage.toLowerCase().startsWith("fr");
-    let heading, advice, color;
+    let heading, advice, level, color;
 
     if (risk >= 4) {
+        level = "HIGH";
         heading = french ? "DANGER : RISQUE ÉLEVÉ" : "DANGER: HIGH RISK";
         advice = french
-            ? "Ne partage aucun PIN ou OTP. N'envoie pas d'argent. Vérifie directement auprès de ton opérateur par un canal officiel."
-            : "Do not share any PIN or OTP. Do not send money. Verify directly with your provider through an official channel.";
-        color = "#fde2e2";
+            ? "Ne partage aucun PIN ou OTP. N'envoie pas d'argent. Vérifie auprès de ton opérateur par un canal officiel."
+            : "Do not share your PIN or OTP. Do not send money. Verify through your provider's official channel.";
+        color = "#ffe1df";
     } else if (risk >= 2) {
+        level = "MEDIUM";
         heading = french ? "ATTENTION : MESSAGE SUSPECT" : "WARNING: SUSPICIOUS MESSAGE";
         advice = french
-            ? "Ne fais rien dans la précipitation. Vérifie l'expéditeur et ton solde avec le menu ou l'application officielle."
-            : "Do not act in a hurry. Verify the sender and your balance using the official menu or app.";
-        color = "#fff0cc";
+            ? "Ne te précipite pas. Vérifie l'expéditeur par un canal officiel."
+            : "Do not rush. Verify the sender through an official channel.";
+        color = "#fff1cf";
     } else if (risk === 1) {
+        level = "LOW";
         heading = french ? "PRUDENCE : SIGNAUX D'ALERTE" : "CAUTION: WARNING SIGNS";
         advice = french
             ? "Ce message contient un élément à vérifier. Ne partage aucune information confidentielle."
-            : "This message contains something that needs checking. Never share confidential information.";
-        color = "#fff0cc";
+            : "This message contains a warning sign. Do not share confidential information.";
+        color = "#fff1cf";
     } else {
+        level = "UNDETERMINED";
         heading = french ? "AUCUN SIGNE COURANT DÉTECTÉ" : "NO COMMON WARNING SIGNS DETECTED";
         advice = french
             ? "Cela ne prouve pas que le message est sûr. Vérifie toujours l'expéditeur."
             : "This does not prove that the message is safe. Always verify the sender.";
-        color = "#e0f3e7";
+        color = "#dff4e4";
     }
 
     const warningList = warnings.length
-        ? "<ul>" + warnings.map(w => "<li>" + w + "</li>").join("") + "</ul>"
+        ? "<ul>" + warnings.map(w => "<li>" + escapeHTML(w) + "</li>").join("") + "</ul>"
         : "";
 
+    result.className = "result";
     result.innerHTML = `
         <div style="background:${color};padding:18px;border-radius:12px;color:#173b28;">
             <h3>${heading}</h3>
-            <p><strong>${french ? "Niveau de risque" : "Risk level"}: ${
-                risk >= 4 ? "HIGH" : risk >= 2 ? "MEDIUM" : risk === 1 ? "LOW" : "UNDETERMINED"
-            }</strong></p>
+            <p><strong>${french ? "Niveau de risque" : "Risk level"}: ${level}</strong></p>
+            <p><strong>Score: ${risk}</strong></p>
             ${warningList}
             <p>${advice}</p>
             <p><strong>${french ? "Important :" : "Important:"}</strong>
             ${french
-                ? "SafeLearn fournit une analyse éducative et ne peut pas garantir qu'un message est frauduleux ou sûr."
-                : "SafeLearn provides educational analysis and cannot guarantee that a message is fraudulent or safe."}</p>
+                ? "SafeLearn fournit une analyse éducative. Ce résultat ne garantit pas qu'un message est frauduleux ou sûr."
+                : "SafeLearn provides educational analysis. This result cannot guarantee that a message is fraudulent or safe."}
+            </p>
         </div>
     `;
-
 }
 
 function clearCheck() {
     const input = document.getElementById("scamText");
+    const result = document.getElementById("checkResult");
 
-    const result =
-        document.getElementById("checkResult") ||
-        document.getElementById("checkerResult");
-
-    if (input) {
-        input.value = "";
-    }
+    if (input) input.value = "";
 
     if (result) {
         result.innerHTML = "";
-        result.style.display = "block";
+        result.style.display = "none";
     }
-
 }
+
 /* REPORT FORM */
 
 document.getElementById('reportForm').addEventListener('submit',function(e){
